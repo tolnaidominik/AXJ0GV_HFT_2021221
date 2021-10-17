@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AXJ0GV_HFT_2021221.Data;
+using System;
+using System.Linq;
 
 namespace AXJ0GV_HFT_2021221.Client
 {
@@ -6,7 +8,9 @@ namespace AXJ0GV_HFT_2021221.Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            DogDbContext context = new DogDbContext();
+            var res = context.Dogs.ToList();
+            ;
         }
     }
 }

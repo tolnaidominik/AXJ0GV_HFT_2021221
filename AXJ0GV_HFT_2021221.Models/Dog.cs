@@ -16,14 +16,14 @@ namespace AXJ0GV_HFT_2021221.Models
     [Table("dogs")]
     public class Dog
     {
-        [Key] // ELSODLEGES KULCS
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required] // KOTELEZO
+        [Required]
         public string Species { get; set; }
         public string Name{ get; set; }
         public Sex Sex{ get; set; }
-        [NotMapped] // NAVIGATION PROPERTY
+        [NotMapped]
         public virtual Owner Owner { get; set; }
         public int OwnerID { get; set; }
     }

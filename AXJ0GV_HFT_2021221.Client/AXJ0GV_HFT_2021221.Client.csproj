@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -15,7 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AXJ0GV_HFT_2021221.Data\AXJ0GV_HFT_2021221.Data.csproj" />
+    <ProjectReference Include="..\AXJ0GV_HFT_2021221.Logic\AXJ0GV_HFT_2021221.Logic.csproj" />
     <ProjectReference Include="..\AXJ0GV_HFT_2021221.Models\AXJ0GV_HFT_2021221.Models.csproj" />
+    <ProjectReference Include="..\AXJ0GV_HFT_2021221.Repository\AXJ0GV_HFT_2021221.Repository.csproj" />
   </ItemGroup>
 
 </Project>

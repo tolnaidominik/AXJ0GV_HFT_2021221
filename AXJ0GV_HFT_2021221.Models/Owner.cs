@@ -10,14 +10,14 @@ namespace AXJ0GV_HFT_2021221.Models
 {
     public class Owner
     {
-        [Key] // ELSODLEGES KULCS
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required] // KOTELEZO
+        [Required]
         public string Name { get; set; }
         public Sex Sex { get; set; }
         public string IdentityCardNumber { get; set; }
-        [NotMapped] // REVERSE NAVIGATION PROPERTY
+        [NotMapped]
         public virtual ICollection<Dog> Dogs{ get; set; }
 
         public Owner()
