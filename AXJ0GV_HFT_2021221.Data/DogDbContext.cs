@@ -53,16 +53,34 @@ namespace AXJ0GV_HFT_2021221.Data
                 IdentityCardNumber = "DSA321",
                 Sex = Sex.Female
             };
-
             Dog Pug = new Dog()
             {
                 Id = 1,
                 Name = "Áfi",
                 Sex = Sex.Female,
                 Species = "Pug",
-                OwnerID = Doma.Id
+                OwnerID = Doma.Id,
             };
-
+            Injection Bordetella = new Injection()
+            {
+                Id = 1,
+                Name = InjectionName.Bordetella_Bronchiseptica,
+                Commonness = Commonness.Once,
+                DogID = Pug.Id
+            };
+            Injection Distemper = new Injection()
+            {
+                Id = 2,
+                Name = InjectionName.Canine_Distemper,
+                Commonness = Commonness.Half_year,
+            };
+            Injection Hepatitis = new Injection()
+            {
+                Id = 3,
+                Name = InjectionName.Canine_Hepatitis,
+                Commonness = Commonness.Yearly,
+                DogID = Pug.Id
+            };
             modelBuilder.Entity<Dog>(entity =>
             {
                 entity.HasOne(dog => dog.Owner)
@@ -70,8 +88,16 @@ namespace AXJ0GV_HFT_2021221.Data
                     .HasForeignKey(dog => dog.OwnerID)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
+            modelBuilder.Entity<Injection>(entity =>
+            {
+                entity.HasOne(injection => injection.Dog)
+                    .WithMany(dog => dog.Injections)
+                    .HasForeignKey(injection => injection.DogID)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
             modelBuilder.Entity<Owner>().HasData(Kritya, Doma, Tubi);
             modelBuilder.Entity<Dog>().HasData(Pug);
+            modelBuilder.Entity<Injection>().HasData(Bordetella, Distemper, Hepatitis);
         }
     }
 }

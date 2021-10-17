@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace AXJ0GV_HFT_2021221.Models
 {
+    [Table("owners")]
     public class Owner
     {
         [Key]
