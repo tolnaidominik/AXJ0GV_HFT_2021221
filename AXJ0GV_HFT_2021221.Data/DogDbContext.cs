@@ -12,6 +12,8 @@ namespace AXJ0GV_HFT_2021221.Data
     {
         public virtual DbSet<Owner> Owners { get; set; }
         public virtual DbSet<Dog> Dogs { get; set; }
+        public virtual DbSet<Injection> Injections { get; set; }
+
         public DogDbContext()
         {
             Database.EnsureCreated();
