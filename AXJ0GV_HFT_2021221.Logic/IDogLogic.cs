@@ -13,5 +13,7 @@ namespace AXJ0GV_HFT_2021221.Logic
         IQueryable<Dog> ReadAll();
         void Update(Dog dog);
         void Delete(int dogId);
+
+        void GroupByAndCountBySpecies();
     }
 }

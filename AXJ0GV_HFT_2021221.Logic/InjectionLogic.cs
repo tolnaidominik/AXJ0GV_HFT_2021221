@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AXJ0GV_HFT_2021221.Logic
 {
-    class InjectionLogic
+    class InjectionLogic : IInjectionLogic
     {
         InjectionRepository repo;
 
@@ -25,6 +25,16 @@ namespace AXJ0GV_HFT_2021221.Logic
         public void Delete(int injectionId)
         {
             repo.Delete(injectionId);
+        }
+
+        public void GroupByAndCountByCommonnes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OrderByPrice()
+        {
+            throw new NotImplementedException();
         }
 
         public IQueryable<Injection> ReadAll()
