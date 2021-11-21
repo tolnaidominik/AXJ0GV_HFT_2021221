@@ -17,9 +17,13 @@ namespace AXJ0GV_HFT_2021221.Logic
             this.repo = repo;
         }
 
-        public void CountAndOrderByDogs()
+        public IEnumerable<KeyValuePair<string, int>> CountDogs()
         {
-            throw new NotImplementedException();
+            return repo
+               .ReadAll()
+               .GroupBy(x => x)
+               .Select(x => new KeyValuePair<string, int>(
+                   x.Key.Name , x.Key.Dogs.Count));
         }
 
         public void Create(Owner owner)
@@ -32,9 +36,13 @@ namespace AXJ0GV_HFT_2021221.Logic
             repo.Delete(ownerId);
         }
 
-        public void GroupByAndCountByName()
+        public IEnumerable<KeyValuePair<string, int>> GroupByAndCountByName()
         {
-            throw new NotImplementedException();
+            return repo
+               .ReadAll()
+               .GroupBy(x => x)
+               .Select(x => new KeyValuePair<string, int>(
+                   x.Key.Name, x.Key.Name.Count()));
         }
 
         public IQueryable<Owner> ReadAll()

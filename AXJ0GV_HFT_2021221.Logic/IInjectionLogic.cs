@@ -13,9 +13,6 @@ namespace AXJ0GV_HFT_2021221.Logic
         IQueryable<Injection> ReadAll();
         void Update(Injection injection);
         void Delete(int injectionId);
-
-        void GroupByAndCountByCommonnes();
-
-        void OrderByPrice();
+        List<Injection> OrderByPrice();
     }
 }

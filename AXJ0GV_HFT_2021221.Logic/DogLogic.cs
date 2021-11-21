@@ -27,9 +27,13 @@ namespace AXJ0GV_HFT_2021221.Logic
             repo.Delete(dogId);
         }
 
-        public void GroupByAndCountBySpecies()
+        public IEnumerable<KeyValuePair<string, int>> GroupByAndCountBySpecies()
         {
-            throw new NotImplementedException();
+            return repo
+                .ReadAll()
+                .GroupBy(x => x.Species)
+                .Select(x => new KeyValuePair<string, int>(
+                    x.Key, x.Key.Count()));
         }
 
         public IQueryable<Dog> ReadAll()

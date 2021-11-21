@@ -26,15 +26,12 @@ namespace AXJ0GV_HFT_2021221.Logic
         {
             repo.Delete(injectionId);
         }
-
-        public void GroupByAndCountByCommonnes()
+        public List<Injection> OrderByPrice()
         {
-            throw new NotImplementedException();
-        }
-
-        public void OrderByPrice()
-        {
-            throw new NotImplementedException();
+            return repo
+                .ReadAll()
+                .OrderBy(x => x.Price)
+                .ToList();
         }
 
         public IQueryable<Injection> ReadAll()
