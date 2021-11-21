@@ -17,12 +17,6 @@ namespace AXJ0GV_HFT_2021221.Logic
         {
             this.repo = repo;
         }
-
-        public InjectionLogic(IInjectionRepository @object)
-        {
-            this.@object = @object;
-        }
-
         public void Create(Injection injection)
         {
             repo.Create(injection);
