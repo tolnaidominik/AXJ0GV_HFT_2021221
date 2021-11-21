@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AXJ0GV_HFT_2021221.Logic
 {
-    class DogLogic : IDogLogic
+    public class DogLogic : IDogLogic
     {
         DogRepository repo;
 

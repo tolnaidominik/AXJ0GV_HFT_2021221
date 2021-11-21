@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AXJ0GV_HFT_2021221.Repository
 {
-    interface IInjectionRepository
+    public interface IInjectionRepository
     {
         void Create(Injection injection);
         Injection ReadOne(int id); // GetById

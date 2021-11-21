@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AXJ0GV_HFT_2021221.Repository
 {
-    interface IDogRepository
+    public interface IDogRepository
     {
         void Create(Dog dog);
         Dog ReadOne(int id); // GetById

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AXJ0GV_HFT_2021221.Logic
 {
-    class OwnerLogic : IOwnerLogic
+    public class OwnerLogic : IOwnerLogic
     {
         OwnerRepository repo;
 

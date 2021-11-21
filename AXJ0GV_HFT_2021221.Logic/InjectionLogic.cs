@@ -8,13 +8,19 @@ using System.Threading.Tasks;
 
 namespace AXJ0GV_HFT_2021221.Logic
 {
-    class InjectionLogic : IInjectionLogic
+    public class InjectionLogic : IInjectionLogic
     {
         InjectionRepository repo;
+        private IInjectionRepository @object;
 
         public InjectionLogic(InjectionRepository repo)
         {
             this.repo = repo;
+        }
+
+        public InjectionLogic(IInjectionRepository @object)
+        {
+            this.@object = @object;
         }
 
         public void Create(Injection injection)
@@ -37,6 +43,13 @@ namespace AXJ0GV_HFT_2021221.Logic
         public IQueryable<Injection> ReadAll()
         {
             return repo.ReadAll();
+        }
+
+        public int SumPrice()
+        {
+            return repo
+                .ReadAll()
+                .Sum(x => x.Price ?? 0);
         }
 
         public void Update(Injection injection)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AXJ0GV_HFT_2021221.Repository
 {
-    interface IOwnerRepository
+    public interface IOwnerRepository
     {
         void Create(Owner owner);
         Owner ReadOne(int id); // GetById

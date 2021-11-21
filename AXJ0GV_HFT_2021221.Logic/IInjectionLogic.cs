@@ -14,5 +14,6 @@ namespace AXJ0GV_HFT_2021221.Logic
         void Update(Injection injection);
         void Delete(int injectionId);
         List<Injection> OrderByPrice();
+        int SumPrice();
     }
 }
