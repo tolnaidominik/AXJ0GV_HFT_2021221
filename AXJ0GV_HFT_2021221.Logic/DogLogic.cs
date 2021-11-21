@@ -40,7 +40,6 @@ namespace AXJ0GV_HFT_2021221.Logic
         {
             return repo.ReadAll();
         }
-
         public void Update(Dog dog)
         {
             repo.Update(dog);

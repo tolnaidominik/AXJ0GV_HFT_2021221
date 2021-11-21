@@ -11,7 +11,6 @@ namespace AXJ0GV_HFT_2021221.Logic
     public class InjectionLogic : IInjectionLogic
     {
         InjectionRepository repo;
-        private IInjectionRepository @object;
 
         public InjectionLogic(InjectionRepository repo)
         {
