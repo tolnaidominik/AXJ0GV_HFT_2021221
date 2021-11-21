@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AXJ0GV_HFT_2021221.Repository
 {
-    public class OwnerRepository
+    public class OwnerRepository : IOwnerRepository
     {
         DogDbContext context;
 

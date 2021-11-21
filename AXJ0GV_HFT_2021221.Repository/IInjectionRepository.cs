@@ -12,7 +12,7 @@ namespace AXJ0GV_HFT_2021221.Repository
         void Create(Injection injection);
         Injection ReadOne(int id); // GetById
         IQueryable<Injection> ReadAll(); // Query
-        void Update(Injection car);
-        void Delete(int carId);
+        void Update(Injection injection);
+        void Delete(int injectionId);
     }
 }
