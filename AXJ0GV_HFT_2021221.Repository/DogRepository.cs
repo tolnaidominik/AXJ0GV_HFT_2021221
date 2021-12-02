@@ -43,7 +43,6 @@ namespace AXJ0GV_HFT_2021221.Repository
         {
             Dog old = ReadOne(dog.Id);
 
-            old.Injections = dog.Injections;
             old.Name = dog.Name;
             old.OwnerID = dog.OwnerID;
             old.Sex = dog.Sex;

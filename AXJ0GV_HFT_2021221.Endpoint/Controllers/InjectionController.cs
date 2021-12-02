@@ -10,39 +10,38 @@ namespace AXJ0GV_HFT_2021221.Endpoint.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class DogController : ControllerBase
+    public class InjectionController : ControllerBase
     {
-        private IDogLogic logic;
+        private IInjectionLogic logic;
 
-        public DogController(IDogLogic logic)
+        public InjectionController(IInjectionLogic logic)
         {
             this.logic = logic;
         }
-
         [HttpGet("test")]
         public string Test()
         {
             return "TEST";
         }
         [HttpGet]
-        public IEnumerable<Dog> GetAll()
+        public IEnumerable<Injection> GetAll()
         {
             return logic.ReadAll();
         }
         [HttpPost]
-        public void AddOne([FromBody] Dog dog)
+        public void AddOne([FromBody] Injection injection)
         {
-            logic.Create(dog);
+            logic.Create(injection);
         }
         [HttpPut]
-        public void EditOne([FromBody] Dog dog)
+        public void EditOne([FromBody] Injection injection)
         {
-            logic.Update(dog);
+            logic.Update(injection);
         }
-        [HttpDelete("{dogId}")]
-        public void DeleteOne([FromRoute] int dogId)
+        [HttpDelete("{injectionId}")]
+        public void DeleteOne([FromRoute] int injectionId)
         {
-            logic.Delete(dogId);
+            logic.Delete(injectionId);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AXJ0GV_HFT_2021221.Models
@@ -18,12 +19,13 @@ namespace AXJ0GV_HFT_2021221.Models
         public string Name { get; set; }
         public Sex Sex { get; set; }
         public string IdentityCardNumber { get; set; }
-        [NotMapped]
-        public virtual ICollection<Dog> Dogs{ get; set; }
+        [NotMapped] // REVERSE NAVIGATION PROPERTY
+        [JsonIgnore]
+        public virtual ICollection<Dog> Dogs { get; set; }
 
         public Owner()
         {
-            this.Dogs = new HashSet<Dog>();
+            Dogs = new HashSet<Dog>();
         }
     }
 }

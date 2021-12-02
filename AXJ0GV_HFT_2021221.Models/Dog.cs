@@ -22,15 +22,14 @@ namespace AXJ0GV_HFT_2021221.Models
         [Required]
         public string Species { get; set; }
         public string Name{ get; set; }
-        public Sex Sex{ get; set; }
+        public Sex Sex { get; set; }
         [NotMapped]
         public virtual Owner Owner { get; set; }
         public int OwnerID { get; set; }
         [NotMapped]
-        public virtual ICollection<Injection> Injections { get; set; }
-        public Dog()
-        {
-            this.Injections = new HashSet<Injection>();
-        }
+        public virtual Injection Injection { get; set; }
+        public int InjectionID{ get; set; }
+        
+        
     }
 }

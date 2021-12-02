@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AXJ0GV_HFT_2021221.Models
@@ -36,10 +37,15 @@ namespace AXJ0GV_HFT_2021221.Models
         public InjectionName Name { get; set; }
         public int? Price { get; set; }
         public Commonness Commonness { get; set; }
-        public int DogID { get; set; }
 
-        [NotMapped] // NAVIGATION PROPERTY
-        public virtual Dog Dog { get; set; }
-        
+        [NotMapped] // REVERSE NAVIGATION PROPERTY
+        [JsonIgnore]
+        public virtual ICollection<Dog> Dogs { get; set; }
+
+        public Injection()
+        {
+            Dogs = new HashSet<Dog>();
+        }
+
     }
 }

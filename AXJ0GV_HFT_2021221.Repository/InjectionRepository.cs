@@ -46,7 +46,6 @@ namespace AXJ0GV_HFT_2021221.Repository
             old.Name = injection.Name;
             old.Price = injection.Price;
             old.Commonness = injection.Commonness;
-            old.DogID = injection.DogID;
 
             context.SaveChanges();
         }

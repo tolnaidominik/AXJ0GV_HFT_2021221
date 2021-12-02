@@ -55,6 +55,24 @@ namespace AXJ0GV_HFT_2021221.Data
                 IdentityCardNumber = "DSA321",
                 Sex = Sex.Female
             };
+            Injection Bordetella = new Injection()
+            {
+                Id = 1,
+                Name = InjectionName.Bordetella_Bronchiseptica,
+                Commonness = Commonness.Once,
+            };
+            Injection Distemper = new Injection()
+            {
+                Id = 2,
+                Name = InjectionName.Canine_Distemper,
+                Commonness = Commonness.Half_year,
+            };
+            Injection Hepatitis = new Injection()
+            {
+                Id = 3,
+                Name = InjectionName.Canine_Hepatitis,
+                Commonness = Commonness.Yearly,
+            };
             Dog Pug = new Dog()
             {
                 Id = 1,
@@ -62,40 +80,21 @@ namespace AXJ0GV_HFT_2021221.Data
                 Sex = Sex.Female,
                 Species = "Pug",
                 OwnerID = Doma.Id,
+                InjectionID = Hepatitis.Id
             };
-            Injection Bordetella = new Injection()
-            {
-                Id = 1,
-                Name = InjectionName.Bordetella_Bronchiseptica,
-                Commonness = Commonness.Once,
-                DogID = Pug.Id
-            };
-            Injection Distemper = new Injection()
-            {
-                Id = 2,
-                Name = InjectionName.Canine_Distemper,
-                Commonness = Commonness.Half_year,
-                DogID = Pug.Id
-            };
-            Injection Hepatitis = new Injection()
-            {
-                Id = 3,
-                Name = InjectionName.Canine_Hepatitis,
-                Commonness = Commonness.Yearly,
-                DogID = Pug.Id
-            };
+            
             modelBuilder.Entity<Dog>(entity =>
             {
-                entity.HasOne(dog => dog.Owner)
-                    .WithMany(owner => owner.Dogs)
+                entity.HasOne(x => x.Owner)
+                    .WithMany(x => x.Dogs)
                     .HasForeignKey(dog => dog.OwnerID)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
-            modelBuilder.Entity<Injection>(entity =>
+            modelBuilder.Entity<Dog>(entity =>
             {
-                entity.HasOne(injection => injection.Dog)
-                    .WithMany(dog => dog.Injections)
-                    .HasForeignKey(injection => injection.DogID)
+                entity.HasOne(x => x.Injection)
+                    .WithMany(x => x.Dogs)
+                    .HasForeignKey(dog => dog.InjectionID)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
             modelBuilder.Entity<Owner>().HasData(Kritya, Doma, Tubi);
