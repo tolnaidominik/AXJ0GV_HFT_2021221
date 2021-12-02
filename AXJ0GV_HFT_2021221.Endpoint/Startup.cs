@@ -1,5 +1,6 @@
 using AXJ0GV_HFT_2021221.Data;
 using AXJ0GV_HFT_2021221.Logic;
+using AXJ0GV_HFT_2021221.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,10 +27,17 @@ namespace AXJ0GV_HFT_2021221.Endpoint
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
 
             services.AddTransient<IDogLogic, DogLogic>();
             services.AddTransient<IOwnerLogic, OwnerLogic>();
             services.AddTransient<IInjectionLogic, InjectionLogic>();
+            
+            services.AddTransient<IDogRepository, DogRepository>();
+            services.AddTransient<IOwnerRepository, OwnerRepository>();
+            services.AddTransient<IInjectionRepository, InjectionRepository>();
+
+
             services.AddTransient<DogDbContext, DogDbContext>();
             
         }

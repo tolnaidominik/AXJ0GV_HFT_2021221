@@ -49,7 +49,7 @@ namespace AXJ0GV_HFT_2021221.Test
             }
         }.AsQueryable());
 
-            logic = new InjectionLogic((InjectionRepository)mockRepo.Object);
+            logic = new InjectionLogic(mockRepo.Object);
         }
         [Test]
         public void SumPrice()

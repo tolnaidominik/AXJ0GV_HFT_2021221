@@ -32,7 +32,7 @@ namespace AXJ0GV_HFT_2021221.Test
                     Species = "Pug"
                 }
         }.AsQueryable());
-            logic = new DogLogic((DogRepository)mockRepo.Object);
+            logic = new DogLogic(mockRepo.Object);
         }
     }
 }

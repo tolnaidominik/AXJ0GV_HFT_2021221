@@ -49,7 +49,7 @@ namespace AXJ0GV_HFT_2021221.Test
                     }
                 }.AsQueryable());
 
-            logic = new OwnerLogic((OwnerRepository)mockRepo.Object);
+            logic = new OwnerLogic(mockRepo.Object);
         }
         [Test]
         public void CountDogs()

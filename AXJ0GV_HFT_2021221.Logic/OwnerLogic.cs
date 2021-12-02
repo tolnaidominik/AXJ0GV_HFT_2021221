@@ -10,9 +10,9 @@ namespace AXJ0GV_HFT_2021221.Logic
 {
     public class OwnerLogic : IOwnerLogic
     {
-        OwnerRepository repo;
+        IOwnerRepository repo;
 
-        public OwnerLogic(OwnerRepository repo)
+        public OwnerLogic(IOwnerRepository repo)
         {
             this.repo = repo;
         }

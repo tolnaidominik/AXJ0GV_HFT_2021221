@@ -36,9 +36,10 @@ namespace AXJ0GV_HFT_2021221.Models
         public InjectionName Name { get; set; }
         public int? Price { get; set; }
         public Commonness Commonness { get; set; }
+        public int DogID { get; set; }
 
         [NotMapped] // NAVIGATION PROPERTY
         public virtual Dog Dog { get; set; }
-        public int DogID { get; set; }
+        
     }
 }

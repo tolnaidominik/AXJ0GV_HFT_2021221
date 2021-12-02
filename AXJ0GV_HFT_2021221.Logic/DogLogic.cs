@@ -10,9 +10,9 @@ namespace AXJ0GV_HFT_2021221.Logic
 {
     public class DogLogic : IDogLogic
     {
-        DogRepository repo;
+        IDogRepository repo;
 
-        public DogLogic(DogRepository repo)
+        public DogLogic(IDogRepository repo)
         {
             this.repo = repo;
         }

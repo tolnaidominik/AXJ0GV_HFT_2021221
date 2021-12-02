@@ -10,9 +10,9 @@ namespace AXJ0GV_HFT_2021221.Logic
 {
     public class InjectionLogic : IInjectionLogic
     {
-        InjectionRepository repo;
+        IInjectionRepository repo;
 
-        public InjectionLogic(InjectionRepository repo)
+        public InjectionLogic(IInjectionRepository repo)
         {
             this.repo = repo;
         }

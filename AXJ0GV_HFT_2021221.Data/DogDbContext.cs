@@ -75,6 +75,7 @@ namespace AXJ0GV_HFT_2021221.Data
                 Id = 2,
                 Name = InjectionName.Canine_Distemper,
                 Commonness = Commonness.Half_year,
+                DogID = Pug.Id
             };
             Injection Hepatitis = new Injection()
             {

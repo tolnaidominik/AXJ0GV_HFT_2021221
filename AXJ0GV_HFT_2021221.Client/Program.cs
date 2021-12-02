@@ -9,11 +9,13 @@ namespace AXJ0GV_HFT_2021221.Client
     {
         static void Main(string[] args)
         {
-            System.Threading.Thread.Sleep(8000);
-
             RestService rest = new RestService("http://localhost:18683");
 
             var result1 = rest.Get<Dog>("/dog");
+
+            var result2 = rest.Get<Owner>("/owner");
+
+            var result3 = rest.Get<Injection>("/injection");
         }
     }
 }
