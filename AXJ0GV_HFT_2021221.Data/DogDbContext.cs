@@ -60,18 +60,21 @@ namespace AXJ0GV_HFT_2021221.Data
                 Id = 1,
                 Name = InjectionName.Bordetella_Bronchiseptica,
                 Commonness = Commonness.Once,
+                Price = 1000
             };
             Injection Distemper = new Injection()
             {
                 Id = 2,
                 Name = InjectionName.Canine_Distemper,
                 Commonness = Commonness.Half_year,
+                Price = 2000
             };
             Injection Hepatitis = new Injection()
             {
                 Id = 3,
                 Name = InjectionName.Canine_Hepatitis,
                 Commonness = Commonness.Yearly,
+                Price = 10000
             };
             Dog Pug = new Dog()
             {

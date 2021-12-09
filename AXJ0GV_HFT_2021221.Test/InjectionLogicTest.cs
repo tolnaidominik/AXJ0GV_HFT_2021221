@@ -40,7 +40,7 @@ namespace AXJ0GV_HFT_2021221.Test
                 Commonness = Commonness.Half_year,
                 Price = 3000
             },
-                    new Injection()
+            new Injection()
             {
                 Id = 3,
                 Name = InjectionName.Canine_Hepatitis,
@@ -57,6 +57,23 @@ namespace AXJ0GV_HFT_2021221.Test
             var result = logic.SumPrice();
 
             Assert.That(result > 10000);
+        }
+        [Test]
+        public void TestReadAll()
+        {
+            var asd = logic.ReadAll().Count();
+            Assert.That(asd == 3);
+        }
+        [Test]
+        public void TestCreate()
+        {
+            Injection testInjection = new Injection()
+            {
+                Id = 3,
+                Commonness = Commonness.Yearly,
+            };
+
+            Assert.Throws(typeof(Exception), () => logic.Create(testInjection));
         }
     }
 }

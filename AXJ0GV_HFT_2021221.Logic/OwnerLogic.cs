@@ -28,7 +28,15 @@ namespace AXJ0GV_HFT_2021221.Logic
 
         public void Create(Owner owner)
         {
-            repo.Create(owner);
+            if(owner.Name == null)
+            {
+                throw new Exception("Wrong owner type.");
+            }
+            else
+            {
+                repo.Create(owner);
+            }
+            
         }
 
         public void Delete(int ownerId)

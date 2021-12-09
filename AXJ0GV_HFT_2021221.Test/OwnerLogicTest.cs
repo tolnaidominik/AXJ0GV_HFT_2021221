@@ -58,5 +58,23 @@ namespace AXJ0GV_HFT_2021221.Test
 
             Assert.That(result.Any);
         }
+        [Test]
+        public void TestReadAll()
+        {
+            var asd = logic.ReadAll().Count();
+            Assert.That(asd == 3);
+        }
+        [Test]
+        public void TestCreate()
+        {
+            Owner testOwner = new Owner()
+            {
+                        Id = 4,
+                        IdentityCardNumber = "DSA321",
+                        Sex = Sex.Female
+            };
+
+            Assert.Throws(typeof(Exception), () => logic.Create(testOwner));
+        }
     }
 }

@@ -19,7 +19,14 @@ namespace AXJ0GV_HFT_2021221.Logic
 
         public void Create(Dog dog)
         {
-            repo.Create(dog);
+            if (dog.Species == null)
+            {
+                throw new Exception("Wrong Dog type.");
+            }
+            else
+            {
+                repo.Create(dog);
+            }
         }
 
         public void Delete(int dogId)
@@ -27,13 +34,21 @@ namespace AXJ0GV_HFT_2021221.Logic
             repo.Delete(dogId);
         }
 
-        public IEnumerable<KeyValuePair<string, int>> GroupByAndCountBySpecies()
+        public int CountByOwner(Owner owner)
         {
             return repo
                 .ReadAll()
-                .GroupBy(x => x.Species)
-                .Select(x => new KeyValuePair<string, int>(
-                    x.Key, x.Key.Count()));
+                .Where(x => x.OwnerID == owner.Id)
+                .Count()
+                ;
+        }
+        public int CountByInjection(Injection injection)
+        {
+            return repo
+                .ReadAll()
+                .Where(x => x.InjectionID == injection.Id)
+                .Count()
+                ;
         }
 
         public IQueryable<Dog> ReadAll()

@@ -14,6 +14,7 @@ namespace AXJ0GV_HFT_2021221.Logic
         void Update(Dog dog);
         void Delete(int dogId);
 
-        IEnumerable<KeyValuePair<string, int>> GroupByAndCountBySpecies();
+        int CountByOwner(Owner owner);
+        int CountByInjection(Injection injection);
     }
 }

@@ -20,6 +20,7 @@ namespace AXJ0GV_HFT_2021221.Test
         [SetUp]
         public void Setup()
         {
+            
             mockRepo
                 .Setup(x => x.ReadAll())
                 .Returns(new List<Dog>
@@ -29,10 +30,77 @@ namespace AXJ0GV_HFT_2021221.Test
                     Id = 1,
                     Name = "Áfi",
                     Sex = Sex.Female,
-                    Species = "Pug"
+                    Species = "Pug",
+                    OwnerID = 1,
+                    InjectionID = 1
+                },
+                new Dog()
+                {
+                    Id = 2,
+                    Name = "Málna",
+                    Sex = Sex.Female,
+                    Species = "Pug",
+                    OwnerID = 1
+                },
+                new Dog()
+                {
+                    Id = 3,
+                    Name = "Sebi",
+                    Sex = Sex.Female,
+                    Species = "Dög",
+                    OwnerID = 1,
+                    InjectionID = 1
                 }
         }.AsQueryable());
             logic = new DogLogic(mockRepo.Object);
+        }
+        [Test]
+        public void TestReadAll()
+        {
+            var asd = logic.ReadAll().Count();
+            Assert.That(asd == 3);
+        }
+        [Test]
+        public void TestNonCrud1()
+        {
+            Owner Doma = new Owner()
+            {
+                Id = 1,
+                Name = "Dominik",
+                IdentityCardNumber = "ASD321",
+                Sex = Sex.Male
+            };
+            int test = logic.CountByOwner(Doma);
+
+            Assert.That(test == 3);
+
+        }
+        [Test]
+        public void TestNonCrud2()
+        {
+            Injection Bordetella = new Injection()
+            {
+                Id = 1,
+                Name = InjectionName.Bordetella_Bronchiseptica,
+                Commonness = Commonness.Once,
+                Price = 1000
+            };
+            int test = logic.CountByInjection(Bordetella);
+
+            Assert.That(test == 2);
+
+        }
+        [Test]
+        public void TestCreate()
+        {
+            Dog testDog = new Dog()
+            {
+                Id = 1,
+                Name = "Áfi",
+                Sex = Sex.Female,
+            };
+
+            Assert.Throws(typeof(Exception), () => logic.Create(testDog));
         }
     }
 }

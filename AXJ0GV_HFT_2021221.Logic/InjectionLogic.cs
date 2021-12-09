@@ -18,7 +18,15 @@ namespace AXJ0GV_HFT_2021221.Logic
         }
         public void Create(Injection injection)
         {
-            repo.Create(injection);
+            if (injection.Price == null)
+            {
+                throw new Exception("Wrong injection type.");
+            }
+            else
+            {
+                repo.Create(injection);
+            }
+            
         }
 
         public void Delete(int injectionId)

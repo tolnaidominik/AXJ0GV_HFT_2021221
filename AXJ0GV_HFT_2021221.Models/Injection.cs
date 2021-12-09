@@ -35,6 +35,7 @@ namespace AXJ0GV_HFT_2021221.Models
         public int Id { get; set; }
         [Required]
         public InjectionName Name { get; set; }
+        [Required]
         public int? Price { get; set; }
         public Commonness Commonness { get; set; }
 
