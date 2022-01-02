@@ -9,6 +9,7 @@
   },
   "profiles": {
     "IIS Express": {
+      "launchUrl": "Dog",
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
@@ -19,6 +20,7 @@
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
+      "launchUrl": "Dog",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

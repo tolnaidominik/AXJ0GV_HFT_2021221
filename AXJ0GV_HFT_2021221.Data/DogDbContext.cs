@@ -91,14 +91,14 @@ namespace AXJ0GV_HFT_2021221.Data
                 entity.HasOne(x => x.Owner)
                     .WithMany(x => x.Dogs)
                     .HasForeignKey(dog => dog.OwnerID)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade);
             });
             modelBuilder.Entity<Dog>(entity =>
             {
                 entity.HasOne(x => x.Injection)
                     .WithMany(x => x.Dogs)
                     .HasForeignKey(dog => dog.InjectionID)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade);
             });
             modelBuilder.Entity<Owner>().HasData(Kritya, Doma, Tubi);
             modelBuilder.Entity<Dog>().HasData(Pug);

@@ -28,9 +28,9 @@ namespace AXJ0GV_HFT_2021221.Client
             {
                 client.GetAsync("").GetAwaiter().GetResult();
             }
-            catch (HttpRequestException)
+            catch (HttpRequestException e)
             {
-                throw new ArgumentException("Endpoint is not available!");
+                throw new ArgumentException("Endpoint is not available!" + e.Message);
             }
 
         }
