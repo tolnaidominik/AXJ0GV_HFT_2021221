@@ -76,7 +76,7 @@ namespace AXJ0GV_HFT_2021221.Data
                 Commonness = Commonness.Yearly,
                 Price = 10000
             };
-            Dog Pug = new Dog()
+            Dog Afi = new Dog()
             {
                 Id = 1,
                 Name = "Áfi",
@@ -84,6 +84,15 @@ namespace AXJ0GV_HFT_2021221.Data
                 Species = "Pug",
                 OwnerID = Doma.Id,
                 InjectionID = Hepatitis.Id
+            };
+            Dog Mogyi = new Dog()
+            {
+                Id = 2,
+                Name = "Mogyoró",
+                Sex = Sex.Female,
+                Species = "Yorki",
+                OwnerID = Tubi.Id,
+                InjectionID = Distemper.Id
             };
             
             modelBuilder.Entity<Dog>(entity =>
@@ -101,7 +110,7 @@ namespace AXJ0GV_HFT_2021221.Data
                     .OnDelete(DeleteBehavior.Cascade);
             });
             modelBuilder.Entity<Owner>().HasData(Kritya, Doma, Tubi);
-            modelBuilder.Entity<Dog>().HasData(Pug);
+            modelBuilder.Entity<Dog>().HasData(Afi,Mogyi);
             modelBuilder.Entity<Injection>().HasData(Bordetella, Distemper, Hepatitis);
         }
     }

@@ -23,8 +23,8 @@ namespace AXJ0GV_HFT_2021221.Endpoint.Controllers
             this.dogLogic = dogLogic;
             this.injectionLogic = injectionLogic;
         }
-
         //ownerLogic
+        //NonCRUD
         [HttpGet]
         public IEnumerable<KeyValuePair<string, int>> GroupByAndCountByName()
         {
@@ -35,18 +35,25 @@ namespace AXJ0GV_HFT_2021221.Endpoint.Controllers
         {
             return ownerLogic.CountDogs();
         }
+
+
         //dogLogic
-        [HttpGet("{name}")]
-        public int CountByOwner(Owner owner)
+        //NonCRUD
+        [HttpGet("{ownerID}")]
+        public int CountByOwner(int ownerID)
         {
-            return dogLogic.CountByOwner(owner);
+            return dogLogic.CountByOwner(ownerID);
         }
-        [HttpGet("{injection}")]
-        public int CountByInjection(Injection injection)
+        [HttpGet("injectionID")]
+        public int CountByInjection(int injectionID)
         {
-            return dogLogic.CountByInjection(injection);
+            return dogLogic.CountByInjection(injectionID);
         }
+
+
+
         //injectionLogic
+        //NonCRUD
         [HttpGet]
         public List<Injection> OrderByPrice()
         {

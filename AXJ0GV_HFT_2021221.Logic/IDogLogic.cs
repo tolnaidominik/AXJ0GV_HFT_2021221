@@ -13,8 +13,7 @@ namespace AXJ0GV_HFT_2021221.Logic
         IQueryable<Dog> ReadAll();
         void Update(Dog dog);
         void Delete(int dogId);
-
-        int CountByOwner(Owner owner);
-        int CountByInjection(Injection injection);
+        int CountByOwner(int ownerID);
+        int CountByInjection(int injectionID);
     }
 }

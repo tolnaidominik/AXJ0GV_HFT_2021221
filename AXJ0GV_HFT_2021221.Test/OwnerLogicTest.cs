@@ -21,7 +21,7 @@ namespace AXJ0GV_HFT_2021221.Test
         {
             Mock<IOwnerRepository> mockRepo = 
                 new Mock<IOwnerRepository>();
-
+            
             mockRepo
                 .Setup(x => x.ReadAll())
                 .Returns(new List<Owner>
@@ -48,14 +48,12 @@ namespace AXJ0GV_HFT_2021221.Test
                         Sex = Sex.Female
                     }
                 }.AsQueryable());
-
             logic = new OwnerLogic(mockRepo.Object);
         }
         [Test]
         public void CountDogs()
         {
             IEnumerable<KeyValuePair<string, int>> result = logic.CountDogs();
-
             Assert.That(result.Any);
         }
         [Test]

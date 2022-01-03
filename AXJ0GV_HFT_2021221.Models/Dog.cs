@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AXJ0GV_HFT_2021221.Models
@@ -24,9 +25,11 @@ namespace AXJ0GV_HFT_2021221.Models
         public string Name{ get; set; }
         public Sex Sex { get; set; }
         [NotMapped]
+        [JsonIgnore]
         public virtual Owner Owner { get; set; }
         public int OwnerID { get; set; }
         [NotMapped]
+        [JsonIgnore]
         public virtual Injection Injection { get; set; }
         public int InjectionID{ get; set; }
         

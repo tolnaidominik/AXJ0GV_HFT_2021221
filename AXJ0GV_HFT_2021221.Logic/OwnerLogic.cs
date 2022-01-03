@@ -17,15 +17,9 @@ namespace AXJ0GV_HFT_2021221.Logic
             this.repo = repo;
         }
 
-        public IEnumerable<KeyValuePair<string, int>> CountDogs()
-        {
-            return repo
-               .ReadAll()
-               .GroupBy(x => x)
-               .Select(x => new KeyValuePair<string, int>(
-                   x.Key.Name , x.Key.Dogs.Count));
-        }
 
+
+        //CRUD
         public void Create(Owner owner)
         {
             if(owner.Name == null)
@@ -36,14 +30,34 @@ namespace AXJ0GV_HFT_2021221.Logic
             {
                 repo.Create(owner);
             }
-            
         }
-
+        public IQueryable<Owner> ReadAll()
+        {
+            return repo.ReadAll();
+        }
+        public void Update(Owner owner)
+        {
+            repo.Update(owner);
+        }
         public void Delete(int ownerId)
         {
             repo.Delete(ownerId);
         }
 
+
+
+
+
+
+        //NONCRUD
+        public IEnumerable<KeyValuePair<string, int>> CountDogs()
+        {
+            return repo
+               .ReadAll()
+               .GroupBy(x => x)
+               .Select(x => new KeyValuePair<string, int>(
+                   x.Key.Name, x.Key.Dogs.Count));
+        }
         public IEnumerable<KeyValuePair<string, int>> GroupByAndCountByName()
         {
             return repo
@@ -51,16 +65,6 @@ namespace AXJ0GV_HFT_2021221.Logic
                .GroupBy(x => x)
                .Select(x => new KeyValuePair<string, int>(
                    x.Key.Name, x.Key.Name.Count()));
-        }
-
-        public IQueryable<Owner> ReadAll()
-        {
-            return repo.ReadAll();
-        }
-
-        public void Update(Owner owner)
-        {
-            repo.Update(owner);
         }
     }
 }

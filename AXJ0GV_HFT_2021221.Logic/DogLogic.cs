@@ -17,6 +17,8 @@ namespace AXJ0GV_HFT_2021221.Logic
             this.repo = repo;
         }
 
+
+        //CRUD
         public void Create(Dog dog)
         {
             if (dog.Species == null)
@@ -28,29 +30,6 @@ namespace AXJ0GV_HFT_2021221.Logic
                 repo.Create(dog);
             }
         }
-
-        public void Delete(int dogId)
-        {
-            repo.Delete(dogId);
-        }
-
-        public int CountByOwner(Owner owner)
-        {
-            return repo
-                .ReadAll()
-                .Where(x => x.OwnerID == owner.Id)
-                .Count()
-                ;
-        }
-        public int CountByInjection(Injection injection)
-        {
-            return repo
-                .ReadAll()
-                .Where(x => x.InjectionID == injection.Id)
-                .Count()
-                ;
-        }
-
         public IQueryable<Dog> ReadAll()
         {
             return repo.ReadAll();
@@ -58,6 +37,30 @@ namespace AXJ0GV_HFT_2021221.Logic
         public void Update(Dog dog)
         {
             repo.Update(dog);
+        }
+        public void Delete(int dogId)
+        {
+            repo.Delete(dogId);
+        }
+
+
+
+
+
+        //NONCRUD
+        public int CountByOwner(int ownerID)
+        {
+            return repo
+                .ReadAll()
+                .Where(x => x.OwnerID == ownerID)
+                .Count();
+        }
+        public int CountByInjection(int injectionID)
+        {
+            return repo
+                .ReadAll()
+                .Where(x => x.InjectionID == injectionID)
+                .Count();
         }
     }
 }

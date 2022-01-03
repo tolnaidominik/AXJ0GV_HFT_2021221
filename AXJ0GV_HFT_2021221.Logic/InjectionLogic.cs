@@ -16,6 +16,8 @@ namespace AXJ0GV_HFT_2021221.Logic
         {
             this.repo = repo;
         }
+
+        //CRUD
         public void Create(Injection injection)
         {
             if (injection.Price == null)
@@ -28,11 +30,24 @@ namespace AXJ0GV_HFT_2021221.Logic
             }
             
         }
-
+        public IQueryable<Injection> ReadAll()
+        {
+            return repo.ReadAll();
+        }
+        public void Update(Injection injection)
+        {
+            repo.Update(injection);
+        }
         public void Delete(int injectionId)
         {
             repo.Delete(injectionId);
         }
+        
+        
+        
+        
+        
+        //NONCRUD
         public List<Injection> OrderByPrice()
         {
             return repo
@@ -40,22 +55,11 @@ namespace AXJ0GV_HFT_2021221.Logic
                 .OrderBy(x => x.Price)
                 .ToList();
         }
-
-        public IQueryable<Injection> ReadAll()
-        {
-            return repo.ReadAll();
-        }
-
         public int SumPrice()
         {
             return repo
                 .ReadAll()
                 .Sum(x => x.Price ?? 0);
-        }
-
-        public void Update(Injection injection)
-        {
-            repo.Update(injection);
         }
     }
 }

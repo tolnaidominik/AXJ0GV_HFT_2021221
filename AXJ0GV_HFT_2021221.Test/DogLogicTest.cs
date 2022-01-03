@@ -61,7 +61,7 @@ namespace AXJ0GV_HFT_2021221.Test
             Assert.That(asd == 3);
         }
         [Test]
-        public void TestNonCrud1()
+        public void CountByOwner()
         {
             Owner Doma = new Owner()
             {
@@ -70,13 +70,13 @@ namespace AXJ0GV_HFT_2021221.Test
                 IdentityCardNumber = "ASD321",
                 Sex = Sex.Male
             };
-            int test = logic.CountByOwner(Doma);
+            int test = logic.CountByOwner(Doma.Id);
 
             Assert.That(test == 3);
 
         }
         [Test]
-        public void TestNonCrud2()
+        public void CountByInjection()
         {
             Injection Bordetella = new Injection()
             {
@@ -85,7 +85,7 @@ namespace AXJ0GV_HFT_2021221.Test
                 Commonness = Commonness.Once,
                 Price = 1000
             };
-            int test = logic.CountByInjection(Bordetella);
+            int test = logic.CountByInjection(Bordetella.Id);
 
             Assert.That(test == 2);
 
