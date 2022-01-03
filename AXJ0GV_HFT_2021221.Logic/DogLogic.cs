@@ -62,5 +62,13 @@ namespace AXJ0GV_HFT_2021221.Logic
                 .Where(x => x.InjectionID == injectionID)
                 .Count();
         }
+        public List<Injection> GetUsedInjections()
+        {
+            return repo
+                .ReadAll()
+                .Where(x => x.InjectionID > 0)
+                .Select(x => x.Injection)
+                .ToList();
+        }
     }
 }

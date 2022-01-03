@@ -13,10 +13,8 @@ namespace AXJ0GV_HFT_2021221.Logic
         IQueryable<Owner> ReadAll();
         void Update(Owner owner);
         void Delete(int ownerId);
-
+        List<Owner> OrderByIdentityCardNumber();
         IEnumerable<KeyValuePair<string, int>> GroupByAndCountByName();
-
-        IEnumerable<KeyValuePair<string, int>> CountDogs();
 
 
     }

@@ -15,5 +15,6 @@ namespace AXJ0GV_HFT_2021221.Logic
         void Delete(int dogId);
         int CountByOwner(int ownerID);
         int CountByInjection(int injectionID);
+        public List<Injection> GetUsedInjections();
     }
 }

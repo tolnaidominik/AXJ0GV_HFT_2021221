@@ -59,6 +59,13 @@ namespace AXJ0GV_HFT_2021221.Test
             Assert.That(result > 10000);
         }
         [Test]
+        public void OrderByPrice()
+        {
+            List<Injection> result = logic.OrderByPrice();
+
+            Assert.That(result[0].Id == 2);
+        }
+        [Test]
         public void TestReadAll()
         {
             var asd = logic.ReadAll().Count();

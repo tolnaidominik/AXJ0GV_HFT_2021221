@@ -31,11 +31,10 @@ namespace AXJ0GV_HFT_2021221.Endpoint.Controllers
             return ownerLogic.GroupByAndCountByName();
         }
         [HttpGet]
-        public IEnumerable<KeyValuePair<string, int>> CountDogs()
+        public List<Owner> OrderByIdentityCardNumber()
         {
-            return ownerLogic.CountDogs();
+            return ownerLogic.OrderByIdentityCardNumber();
         }
-
 
         //dogLogic
         //NonCRUD
@@ -44,10 +43,15 @@ namespace AXJ0GV_HFT_2021221.Endpoint.Controllers
         {
             return dogLogic.CountByOwner(ownerID);
         }
-        [HttpGet("injectionID")]
+        [HttpGet("{injectionID}")]
         public int CountByInjection(int injectionID)
         {
             return dogLogic.CountByInjection(injectionID);
+        }
+        [HttpGet]
+        public List<Injection> GetUsedInjections()
+        {
+            return dogLogic.GetUsedInjections();
         }
 
 

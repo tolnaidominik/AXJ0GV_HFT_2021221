@@ -13,17 +13,36 @@ namespace AXJ0GV_HFT_2021221.Client
     {
         static void Main(string[] args)
         {
-            System.Threading.Thread.Sleep(5000);
+            Console.Write('A');
+            System.Threading.Thread.Sleep(50);
+            Console.Write('X');
+            System.Threading.Thread.Sleep(50);
+            Console.Write('J');
+            System.Threading.Thread.Sleep(50);
+            Console.Write('0');
+            System.Threading.Thread.Sleep(50);
+            Console.Write('G');
+            System.Threading.Thread.Sleep(50);
+            Console.Write('V');
+            System.Threading.Thread.Sleep(50);
+            Console.Write(" - ");
+            System.Threading.Thread.Sleep(50);
+            Console.Write(" F ");
+            System.Threading.Thread.Sleep(50);
+            Console.Write(" É ");
+            System.Threading.Thread.Sleep(50);
+            Console.Write(" L ");
+            System.Threading.Thread.Sleep(50);
+            Console.Write(" É ");
+            System.Threading.Thread.Sleep(50);
+            Console.Write(" V ");
+            System.Threading.Thread.Sleep(50);
+            Console.Write(" E ");
+            System.Threading.Thread.Sleep(50);
+            Console.Write(" S ");
+            System.Threading.Thread.Sleep(50);
+
             RestService rest = new RestService("http://localhost:18683");
-            Injection injectionHelp = new Injection();
-            Owner ownerHelp = new Owner();
-            //var result1 = rest.Get<Dog>("/dog");
-
-            //var result2 = rest.Get<Owner>("/owner");
-
-            //var result3 = rest.Get<Injection>("/injection");
-
-            //methods i need
             void theEndThing()
             {
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -68,33 +87,43 @@ namespace AXJ0GV_HFT_2021221.Client
                 switch (num)
                 {
                     case 1:
-                        var GroupByAndCountByName = rest.Get<KeyValuePair<string, int>>("stat/GroupByAndCountByName");
-                        Console.WriteLine("Case1");
-                        foreach (var item in GroupByAndCountByName)
+                        var OrderByIdentityCardNumber = rest.Get<Owner>("stat/OrderByIdentityCardNumber");
+                        foreach (var item in OrderByIdentityCardNumber)
                         {
-                            Console.WriteLine("asd");
-                            Console.WriteLine(item.Key + " " + item.Value);
+                            Console.WriteLine(item.Name + " " + item.IdentityCardNumber);
                         }
                         break;
                     case 2:
-                        var CountDogs = rest.Get<KeyValuePair<string, int>>("stat/CountDogs");
-                        Console.WriteLine("Case2");
-                        foreach (var cso in CountDogs)
+                        var usedInjections = rest.Get<Injection>("stat/GetUsedInjections");
+                        foreach (var item in usedInjections)
                         {
-                            Console.WriteLine(cso.Key + " " + cso.Value);
+                            Console.WriteLine(item.Name + " " + item.Price);
                         }
                         break;
                     case 3:
+                        Console.Write("Enter the owner's ID: (Kristof - 1, Dominik - 2, Eszter - 3): ");
                         var ownerID = int.Parse(Console.ReadLine());
                         var CountByOwner = rest.GetSingle<int>("stat/CountByOwner/"+ ownerID);
-                        var owners = rest.Get<Owner>("stat/GetAllOwner");
+                        var owners = rest.Get<Owner>("Owner");
                         Owner getOwner = owners.Where(x => x.Id == ownerID).FirstOrDefault();
                         Console.WriteLine("{0} has {1} dog(s)", getOwner.Name, CountByOwner);
                         break;
                     case 4:
-                        string injectionID = Console.ReadLine();
+                        Console.Write("Enter the injection's ID:" +
+                            "\n1 - {0}\n2 - {1}\n3 - {2}\n4 - {3}\n5 - {4}\n6 - {5}\n7 - {6}\n8 - {7}: ",
+                            InjectionName.Bordetella_Bronchiseptica,
+                            InjectionName.Canine_Distemper,
+                            InjectionName.Canine_Hepatitis,
+                            InjectionName.Canine_Parainfluenza,
+                            InjectionName.Heartworm,
+                            InjectionName.Leptospirosis,
+                            InjectionName.Parvovirus,
+                            InjectionName.Rabies);
+                        int injectionID = int.Parse(Console.ReadLine());
                         var CountByInjection = rest.GetSingle<int>("stat/CountByInjection/"+injectionID);
-                        Console.WriteLine("The {0} injection has been used at {1} dog(s)", injectionID, CountByInjection);
+                        var injections = rest.Get<Injection>("Injection");
+                        Injection getInjection = injections.Where(x => x.Id == injectionID).FirstOrDefault();
+                        Console.WriteLine("The {0} injection has been used at {1} dog(s)", getInjection.Name, CountByInjection);
                         break;
                     case 5:
                         var OrderByPrice = rest.Get<Injection>("stat/OrderByPrice");
@@ -119,6 +148,7 @@ namespace AXJ0GV_HFT_2021221.Client
                 {
                     //OwnersCrud
                     case 1:
+                        Console.Clear();
                         Console.WriteLine("You are going to create an Owner.");
                         Console.Write("Name: ");
                         string ownerName = Console.ReadLine();
@@ -135,7 +165,7 @@ namespace AXJ0GV_HFT_2021221.Client
                         {
                             ownerSexEnum = Sex.Male;
                         }
-                        ownerHelp = new Owner()
+                        Owner ownerHelp = new Owner()
                         {
                             Name = ownerName,
                             IdentityCardNumber = ownerICN,
@@ -144,6 +174,7 @@ namespace AXJ0GV_HFT_2021221.Client
                         rest.Post(ownerHelp, "Owner");
                         break;
                     case 2:
+                        Console.Clear();
                         var owners = rest.Get<Owner>("Owner");
                         foreach (var item in owners)
                         {
@@ -152,14 +183,17 @@ namespace AXJ0GV_HFT_2021221.Client
                         break;
 
                     case 3:
-
+                        Console.Clear();
                         break;
                     case 4:
+                        Console.Clear();
+                        Console.Write("Enter the owner's ID you want to delete: ");
                         int numberOwner = int.Parse(Console.ReadLine());
-                        rest.Delete(numberOwner, "Owner" + numberOwner);
+                        rest.Delete(numberOwner, "Owner");
                         break;
                     //InjectionsCrud
                     case 5:
+                        Console.Clear();
                         Console.WriteLine("You are going to create an Injection.");
                         Console.Write("0 - {0}\n1 - {1}\n2 - {2}\n3 - {3}\n4 - {4}\n5 - {5}\n6 - {6}\n7 - {7}: ", 
                             InjectionName.Bordetella_Bronchiseptica,
@@ -205,7 +239,7 @@ namespace AXJ0GV_HFT_2021221.Client
                         }
                         Console.Write("Price: ");
                         int injectionHelpPrice = int.Parse(Console.ReadLine());
-                        injectionHelp = new Injection()
+                        Injection injectionHelp = new Injection()
                         {
                             Name = injectionHelpName,
                             Commonness = injectionHelpCommonness,
@@ -214,6 +248,7 @@ namespace AXJ0GV_HFT_2021221.Client
                         rest.Post(injectionHelp, "Injection");
                         break;
                     case 6:
+                        Console.Clear();
                         var injections = rest.Get<Injection>("Injection");
                         foreach (var item in injections)
                         {
@@ -221,14 +256,17 @@ namespace AXJ0GV_HFT_2021221.Client
                         }
                         break;
                     case 7:
-
+                        Console.Clear();
                         break;
                     case 8:
+                        Console.Clear();
+                        Console.Write("Enter the injection's ID you want to delete: ");
                         int numberInjection = int.Parse(Console.ReadLine());
-                        rest.Delete(numberInjection, "Injection" + numberInjection);
+                        rest.Delete(numberInjection, "Injection");
                         break;
                     //DogsCrud
                     case 9:
+                        Console.Clear();
                         Console.WriteLine("You are going to create a Dog.");
                         Console.Write("Name: ");
                         string dogName = Console.ReadLine();
@@ -245,33 +283,49 @@ namespace AXJ0GV_HFT_2021221.Client
                         }
                         Console.Write("Species: ");
                         string dogSpecies = Console.ReadLine();
+                        List<Owner> ownersHelpList = rest.Get<Owner>("Owner");
+                        int dogOwnerId = 1;
+                        int dogInjectionId = 1;
+                        List<Injection> injectionHelpList = rest.Get<Injection>("Injection");
+                        Console.WriteLine("Choose an Owner: ");
+                        foreach (var item in ownersHelpList)
+                        {
+                            Console.WriteLine(item.Name + " " + item.Id);
+                        }
+                        dogOwnerId = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Choose an Injection: ");
+                        foreach (var item in injectionHelpList)
+                        {
+                            Console.WriteLine(item.Name + " " + item.Id);
+                        }
+                        dogInjectionId = int.Parse(Console.ReadLine());
                         Dog newDog = new Dog()
                         {
                             Name = dogName,
                             Sex = dogSex,
                             Species = dogSpecies,
-                            OwnerID = 1,
-                            InjectionID = 2
+                            OwnerID = dogOwnerId,
+                            InjectionID = dogInjectionId
                         };
                         rest.Post(newDog, "Dog");
                         break;
                     case 10:
+                        Console.Clear();
                         var dogs = rest.Get<Dog>("Dog");
                         foreach (var item in dogs)
                         {
                             Console.WriteLine(item.Name + " " + item.Species);
                         }
-
                         break;
-                    case 11: 
-                        
+                    case 11:
+                        Console.Clear();
                         break;
                     case 12:
+                        Console.Clear();
+                        Console.Write("Enter the dog's ID you want to delete: ");
                         int numberDog = int.Parse(Console.ReadLine());
-                        rest.Delete(numberDog, "Dog" + numberDog);
+                        rest.Delete(numberDog, "Dog");
                         break;
-                    
-                    
                     default:
                         Console.WriteLine("Error!");
                         break;
@@ -293,8 +347,8 @@ namespace AXJ0GV_HFT_2021221.Client
                       });
 
             var nonCrudMenu = new ConsoleMenu(args, level: 1)
-               .Add("Owner -> GroupByAndCountByName", () => NonCrud(1))
-               .Add("Owner -> CountDogs", () => NonCrud(2))
+               .Add("Owner -> OrderByIdentityCardNumber", () => NonCrud(1))
+               .Add("Dog -> GetUsedInjections", () => NonCrud(2))
                .Add("Dog -> CountByOwner", () => NonCrud(3))
                .Add("Dog -> CountByInjection", () => NonCrud(4))
                .Add("Injection -> OrderByPrice", () => NonCrud(5))

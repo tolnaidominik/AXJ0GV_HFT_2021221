@@ -51,16 +51,17 @@ namespace AXJ0GV_HFT_2021221.Test
             logic = new OwnerLogic(mockRepo.Object);
         }
         [Test]
-        public void CountDogs()
-        {
-            IEnumerable<KeyValuePair<string, int>> result = logic.CountDogs();
-            Assert.That(result.Any);
-        }
-        [Test]
         public void TestReadAll()
         {
             var asd = logic.ReadAll().Count();
             Assert.That(asd == 3);
+        }
+        [Test]
+        public void OrderByICN()
+        {
+            List<Owner> result = logic.OrderByIdentityCardNumber();
+
+            Assert.That(result[0].Id == 1);
         }
         [Test]
         public void TestCreate()

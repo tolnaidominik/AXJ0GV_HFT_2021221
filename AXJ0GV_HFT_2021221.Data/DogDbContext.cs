@@ -76,6 +76,41 @@ namespace AXJ0GV_HFT_2021221.Data
                 Commonness = Commonness.Yearly,
                 Price = 10000
             };
+            Injection Parainfluenza = new Injection()
+            {
+                Id = 4,
+                Name = InjectionName.Canine_Parainfluenza,
+                Commonness = Commonness.Once,
+                Price = 100000
+            };
+            Injection Heartworm = new Injection()
+            {
+                Id = 5,
+                Name = InjectionName.Heartworm,
+                Commonness = Commonness.Yearly,
+                Price = 30000
+            };
+            Injection Leptospirosis = new Injection()
+            {
+                Id = 6,
+                Name = InjectionName.Leptospirosis,
+                Commonness = Commonness.Half_year,
+                Price = 30020
+            };
+            Injection Parvovirus = new Injection()
+            {
+                Id = 7,
+                Name = InjectionName.Parvovirus,
+                Commonness = Commonness.Yearly,
+                Price = 55500
+            };
+            Injection Rabies = new Injection()
+            {
+                Id = 8,
+                Name = InjectionName.Rabies,
+                Commonness = Commonness.Yearly,
+                Price = 55500
+            };
             Dog Afi = new Dog()
             {
                 Id = 1,
@@ -111,7 +146,7 @@ namespace AXJ0GV_HFT_2021221.Data
             });
             modelBuilder.Entity<Owner>().HasData(Kritya, Doma, Tubi);
             modelBuilder.Entity<Dog>().HasData(Afi,Mogyi);
-            modelBuilder.Entity<Injection>().HasData(Bordetella, Distemper, Hepatitis);
+            modelBuilder.Entity<Injection>().HasData(Bordetella, Distemper, Hepatitis, Parainfluenza, Heartworm, Leptospirosis, Parvovirus, Rabies);
         }
     }
 }

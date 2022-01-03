@@ -50,13 +50,12 @@ namespace AXJ0GV_HFT_2021221.Logic
 
 
         //NONCRUD
-        public IEnumerable<KeyValuePair<string, int>> CountDogs()
+        public List<Owner> OrderByIdentityCardNumber()
         {
             return repo
                .ReadAll()
-               .GroupBy(x => x)
-               .Select(x => new KeyValuePair<string, int>(
-                   x.Key.Name, x.Key.Dogs.Count));
+               .OrderBy(x => x.IdentityCardNumber)
+               .ToList();
         }
         public IEnumerable<KeyValuePair<string, int>> GroupByAndCountByName()
         {

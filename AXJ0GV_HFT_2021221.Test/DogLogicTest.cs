@@ -76,6 +76,13 @@ namespace AXJ0GV_HFT_2021221.Test
 
         }
         [Test]
+        public void GetUsedInjections()
+        {
+            var usedinjections = logic.GetUsedInjections();
+            Assert.That(usedinjections.Count == 2);
+
+        }
+        [Test]
         public void CountByInjection()
         {
             Injection Bordetella = new Injection()
