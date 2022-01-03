@@ -14,33 +14,33 @@ namespace AXJ0GV_HFT_2021221.Client
         static void Main(string[] args)
         {
             Console.Write('A');
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write('X');
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write('J');
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write('0');
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write('G');
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write('V');
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write(" - ");
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write(" F ");
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write(" É ");
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write(" L ");
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write(" É ");
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write(" V ");
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write(" E ");
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
             Console.Write(" S ");
-            System.Threading.Thread.Sleep(50);
+            System.Threading.Thread.Sleep(200);
 
             RestService rest = new RestService("http://localhost:18683");
             void theEndThing()
@@ -58,22 +58,22 @@ namespace AXJ0GV_HFT_2021221.Client
                         var dogs = rest.Get<Dog>("Dog");
                         foreach (var dog in dogs)
                         {
-                            Console.WriteLine(dog.Name);
+                            Console.WriteLine("{0,-3} {1,-10} {2,-10} {3,-6}", dog.Id, dog.Name, dog.Species, dog.Sex);
                         }
                         break;
                     case "Injection":
                         var injections = rest.Get<Injection>("Injection");
                         foreach (var injection in injections)
                         {
-                            Console.WriteLine("{0} ({1}Ft)",
-                                injection.Name, injection.Price);
+                            Console.WriteLine("{0,-3} {1,-30} {2,-10} {3,-10}",
+                                injection.Id, injection.Name, injection.Price, injection.Commonness);
                         }
                         break;
                     case "Owner":
                         var owners = rest.Get<Owner>("Owner");
                         foreach (var owner in owners)
                         {
-                            Console.WriteLine("{0} {1}", owner.Name, owner.IdentityCardNumber);
+                            Console.WriteLine("{0,-3} {1,-10} {2,-7} {3,-6}", owner.Id, owner.Name, owner.IdentityCardNumber, owner.Sex);
                         }
                         break;
                     default:
@@ -109,16 +109,11 @@ namespace AXJ0GV_HFT_2021221.Client
                         Console.WriteLine("{0} has {1} dog(s)", getOwner.Name, CountByOwner);
                         break;
                     case 4:
-                        Console.Write("Enter the injection's ID:" +
-                            "\n1 - {0}\n2 - {1}\n3 - {2}\n4 - {3}\n5 - {4}\n6 - {5}\n7 - {6}\n8 - {7}: ",
-                            InjectionName.Bordetella_Bronchiseptica,
-                            InjectionName.Canine_Distemper,
-                            InjectionName.Canine_Hepatitis,
-                            InjectionName.Canine_Parainfluenza,
-                            InjectionName.Heartworm,
-                            InjectionName.Leptospirosis,
-                            InjectionName.Parvovirus,
-                            InjectionName.Rabies);
+                        int index = 1;
+                        foreach (InjectionName injectionName in (InjectionName[])Enum.GetValues(typeof(InjectionName)))
+                        {
+                            Console.WriteLine("{0} - {1}", index++, injectionName);
+                        }
                         int injectionID = int.Parse(Console.ReadLine());
                         var CountByInjection = rest.GetSingle<int>("stat/CountByInjection/"+injectionID);
                         var injections = rest.Get<Injection>("Injection");
@@ -178,15 +173,66 @@ namespace AXJ0GV_HFT_2021221.Client
                         var owners = rest.Get<Owner>("Owner");
                         foreach (var item in owners)
                         {
-                            Console.WriteLine(item.Name + " " + item.IdentityCardNumber);
+                            Console.WriteLine(item.Id + " " + item.Name + " " + item.IdentityCardNumber + " " + item.Sex);
                         }
                         break;
 
                     case 3:
                         Console.Clear();
+                        var ownerList = rest.Get<Owner>("Owner");
+                        Console.WriteLine("Which owner do you want to update? - CHOOSE AN ID");
+                        foreach (var item in ownerList)
+                        {
+                            Console.WriteLine(item.Id + " " + item.Name + " " + item.IdentityCardNumber + item.Sex);
+                        }
+                        int ownerIdForChange = int.Parse(Console.ReadLine());
+                        Owner ownerforChange = ownerList.Where(x => x.Id == ownerIdForChange).FirstOrDefault();
+                        string name = ownerforChange.Name;
+                        string icn = ownerforChange.IdentityCardNumber;
+                        Sex sexforchange = ownerforChange.Sex;
+                        Console.WriteLine("Owner's information: ");
+                        Console.Write("Name: {0}\nIdentity Card Number: {1}\nSex: {2}", name, icn, sexforchange);
+                        Console.WriteLine("\nWhat do you want to change? 1 - Name, 2 - Identity Card Number, 3 - Sex");
+                        int informationChange = int.Parse(Console.ReadLine());
+                        if (informationChange == 1)
+                        {
+                            Console.Write("Enter a new name: ");
+                            name = Console.ReadLine();
+                        }
+                        else if (informationChange == 2)
+                        {
+                            Console.Write("Enter a identity card number: ");
+                            icn = Console.ReadLine();
+                        }
+                        else
+                        {
+                            Console.Write("Enter a new Sex: 0 - Male, 1 - Female");
+                            int help = int.Parse(Console.ReadLine());
+                            if (help == 0)
+                            {
+                                sexforchange = Sex.Male;
+                            }
+                            else
+                            {
+                                sexforchange = Sex.Female;
+                            }
+                        }
+                        Owner updatedOwner = new Owner()
+                        {
+                            Id = ownerforChange.Id,
+                            Name = name,
+                            IdentityCardNumber = icn,
+                            Sex = sexforchange
+                        };
+                        rest.Put(updatedOwner, "Owner");
                         break;
                     case 4:
                         Console.Clear();
+                        var ownerforDelete = rest.Get<Owner>("Owner");
+                        foreach (var item in ownerforDelete)
+                        {
+                            Console.WriteLine(item.Id + " " + item.Name);
+                        }
                         Console.Write("Enter the owner's ID you want to delete: ");
                         int numberOwner = int.Parse(Console.ReadLine());
                         rest.Delete(numberOwner, "Owner");
@@ -195,54 +241,26 @@ namespace AXJ0GV_HFT_2021221.Client
                     case 5:
                         Console.Clear();
                         Console.WriteLine("You are going to create an Injection.");
-                        Console.Write("0 - {0}\n1 - {1}\n2 - {2}\n3 - {3}\n4 - {4}\n5 - {5}\n6 - {6}\n7 - {7}: ", 
-                            InjectionName.Bordetella_Bronchiseptica,
-                            InjectionName.Canine_Distemper,
-                            InjectionName.Canine_Hepatitis,
-                            InjectionName.Canine_Parainfluenza,
-                            InjectionName.Heartworm,
-                            InjectionName.Leptospirosis,
-                            InjectionName.Parvovirus,
-                            InjectionName.Rabies);
+                        int index = 1;
+                        foreach (InjectionName injectionName in (InjectionName[])Enum.GetValues(typeof(InjectionName)))
+                        {
+                            Console.WriteLine("{0} - {1}", index++, injectionName);
+                        }
                         int InjectionNameNumber = int.Parse(Console.ReadLine());
-                        InjectionName injectionHelpName;
-                        switch (InjectionNameNumber)
+                        InjectionName injectionHelpName = (InjectionName)InjectionNameNumber;
+                        index = 1;
+                        foreach (Commonness commonness in (Commonness[])Enum.GetValues(typeof(Commonness)))
                         {
-                            case 0: injectionHelpName = InjectionName.Bordetella_Bronchiseptica; break;
-                            case 1: injectionHelpName = InjectionName.Canine_Distemper; break;
-                            case 2: injectionHelpName = InjectionName.Canine_Hepatitis; break;
-                            case 3: injectionHelpName = InjectionName.Canine_Parainfluenza; break;
-                            case 4: injectionHelpName = InjectionName.Heartworm; break;
-                            case 5: injectionHelpName = InjectionName.Leptospirosis; break;
-                            case 6: injectionHelpName = InjectionName.Parvovirus; break;
-                            case 7: injectionHelpName = InjectionName.Rabies; break;
-                            default:
-                                injectionHelpName = InjectionName.Bordetella_Bronchiseptica;
-                                break;
+                            Console.WriteLine("{0} - {1}", index++, commonness);
                         }
-                        Commonness injectionHelpCommonness;
-                        Console.Write("0 - {0}\n1 - {1}\n2 - {2}\n3 - {3}: ", 
-                            Commonness.Once, 
-                            Commonness.Monthly, 
-                            Commonness.Half_year, 
-                            Commonness.Yearly);
                         int injectionHelpCommonnesNumber = int.Parse(Console.ReadLine());
-                        switch (injectionHelpCommonnesNumber)
-                        {
-                            case 0: injectionHelpCommonness = Commonness.Once; break;
-                            case 1: injectionHelpCommonness = Commonness.Monthly; break;
-                            case 2: injectionHelpCommonness = Commonness.Half_year; break;
-                            case 3: injectionHelpCommonness = Commonness.Yearly; break;
-                            default:
-                                injectionHelpCommonness = Commonness.Once;
-                                break;
-                        }
+                        Commonness injectionHelpCommonnes = (Commonness)injectionHelpCommonnesNumber;
                         Console.Write("Price: ");
                         int injectionHelpPrice = int.Parse(Console.ReadLine());
                         Injection injectionHelp = new Injection()
                         {
                             Name = injectionHelpName,
-                            Commonness = injectionHelpCommonness,
+                            Commonness = injectionHelpCommonnes,
                             Price = injectionHelpPrice
                         };
                         rest.Post(injectionHelp, "Injection");
@@ -252,14 +270,67 @@ namespace AXJ0GV_HFT_2021221.Client
                         var injections = rest.Get<Injection>("Injection");
                         foreach (var item in injections)
                         {
-                            Console.WriteLine(item.Name + " " + item.Price);
+                            Console.WriteLine(item.Id + " " + item.Name + " " + item.Price + " " + item.Commonness);
                         }
                         break;
                     case 7:
                         Console.Clear();
+                        var injectionsList = rest.Get<Injection>("Injection");
+                        foreach (var item in injectionsList)
+                        {
+                            Console.WriteLine(item.Id + " " + item.Name + " " + item.Commonness + " " + item.Price);
+                        }
+                        Console.WriteLine("Which Injection do you want to change? CHOOSE AN ID");
+                        int chosenInjectionNumber = int.Parse(Console.ReadLine());
+                        Injection chosenInjection = injectionsList.Where(x => x.Id == chosenInjectionNumber).FirstOrDefault();
+                        InjectionName oldName = chosenInjection.Name;
+                        int? oldPrice = chosenInjection.Price;
+                        Commonness oldCommonness = chosenInjection.Commonness;
+                        Console.WriteLine("What information do you want to change? 1 - Name, 2 - Commonness, 3 - Price");
+                        int informationForChange = int.Parse(Console.ReadLine());
+                        if (informationForChange == 1)
+                        {
+                            index = 0;
+                            foreach (InjectionName injectionName in (InjectionName[])Enum.GetValues(typeof(InjectionName)))
+                            {
+                                Console.WriteLine("{0} - {1}", index++, injectionName);
+                            }
+                            Console.WriteLine("For what do you want to change your injection's Name? CHOOSE AN ID");
+                            int newInjectionNameNumber = int.Parse(Console.ReadLine());
+                            oldName = (InjectionName)newInjectionNameNumber;
+                        }
+                        else if (informationForChange == 2)
+                        {
+                            index = 0;
+                            foreach (Commonness commonness in (Commonness[])Enum.GetValues(typeof(Commonness)))
+                            {
+                                Console.WriteLine("{0} - {1}", index++, commonness);
+                            }
+                            Console.Write("For what do you want to change your injection's commonness CHOOSE AN ID? ");
+                            int newInjectionCommonnessNumber = int.Parse(Console.ReadLine());
+                            oldCommonness = (Commonness)newInjectionCommonnessNumber;
+                        }
+                        else
+                        {
+                            Console.Write("Enter the new price: ");
+                            oldPrice = int.Parse(Console.ReadLine());
+                        }
+                        Injection updatedInjection = new Injection
+                        {
+                            Id = chosenInjection.Id,
+                            Name = oldName,
+                            Commonness = oldCommonness,
+                            Price = oldPrice
+                        };
+                        rest.Put(updatedInjection, "Injection");
                         break;
                     case 8:
                         Console.Clear();
+                        var deleteInjectionList = rest.Get<Injection>("Injection");
+                        foreach (var item in deleteInjectionList)
+                        {
+                            Console.WriteLine(item.Id + " " + item.Name);
+                        }
                         Console.Write("Enter the injection's ID you want to delete: ");
                         int numberInjection = int.Parse(Console.ReadLine());
                         rest.Delete(numberInjection, "Injection");
@@ -314,14 +385,57 @@ namespace AXJ0GV_HFT_2021221.Client
                         var dogs = rest.Get<Dog>("Dog");
                         foreach (var item in dogs)
                         {
-                            Console.WriteLine(item.Name + " " + item.Species);
+                            Console.WriteLine(item.Id + " " + item.Name + " " + item.Species + " " + item.Sex);
                         }
                         break;
                     case 11:
                         Console.Clear();
+                        var dogsList = rest.Get<Dog>("Dog");
+                        foreach (var item in dogsList)
+                        {
+                            Console.WriteLine(item.Id + " " + item.Name + " " + item.Sex + " " + item.Species);
+                        }
+                        Console.Write("Choose a dog (BY ID): ");
+                        int choosenDogNumber = int.Parse(Console.ReadLine());
+                        Dog chosenDog = dogsList.Where(x => x.Id == choosenDogNumber).FirstOrDefault();
+                        string oldNameDog = chosenDog.Name;
+                        Sex oldSex = chosenDog.Sex;
+                        string oldSpecies = chosenDog.Species;
+                        Console.WriteLine("Which information do you want to update? 1 - Name, 2 - Sex, 3 - Species");
+                        int informationForChangeDog = int.Parse(Console.ReadLine());
+                        if (informationForChangeDog == 1)
+                        {
+                            Console.Write("Enter a new name for the dog: ");
+                            oldNameDog = Console.ReadLine();
+                        }
+                        else if (informationForChangeDog == 2)
+                        {
+                            Console.Write("Choose a new Sex for the dog: 0 - Male, 1 - Female");
+                            oldSex = (Sex)int.Parse(Console.ReadLine());
+                        }
+                        else
+                        {
+                            Console.Write("Enter the new species for the dog: ");
+                            oldSpecies = Console.ReadLine();
+                        }
+                        Dog updatedDog = new Dog()
+                        {
+                            Id = chosenDog.Id,
+                            Name = oldNameDog,
+                            Sex = oldSex,
+                            Species = oldSpecies,
+                            OwnerID = chosenDog.Id,
+                            InjectionID = chosenDog.InjectionID
+                        };
+                        rest.Put(updatedDog, "Dog");
                         break;
                     case 12:
                         Console.Clear();
+                        var deleteDogList = rest.Get<Dog>("Dog");
+                        foreach (var item in deleteDogList)
+                        {
+                            Console.WriteLine(item.Id + " " + item.Name);
+                        }
                         Console.Write("Enter the dog's ID you want to delete: ");
                         int numberDog = int.Parse(Console.ReadLine());
                         rest.Delete(numberDog, "Dog");
@@ -380,7 +494,7 @@ namespace AXJ0GV_HFT_2021221.Client
                {
                    config.Selector = "--> ";
                    config.EnableFilter = false;
-                   config.Title = "Non-CRUD queries";
+                   config.Title = "CRUD queries";
                    config.EnableBreadcrumb = true;
                    config.WriteBreadcrumbAction = titles => Console.WriteLine(string.Join(" / ", titles));
                });
