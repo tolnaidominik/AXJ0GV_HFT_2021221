@@ -1,7 +1,4 @@
-﻿using AXJ0GV_HFT_2021221.Data;
-using AXJ0GV_HFT_2021221.Logic;
-using AXJ0GV_HFT_2021221.Models;
-using AXJ0GV_HFT_2021221.Repository;
+﻿using AXJ0GV_HFT_2021221.Models;
 using ConsoleTools;
 using System;
 using System.Collections.Generic;
@@ -270,7 +267,7 @@ namespace AXJ0GV_HFT_2021221.Client
                         var injections = rest.Get<Injection>("Injection");
                         foreach (var item in injections)
                         {
-                            Console.WriteLine(item.Id + " " + item.Name + " " + item.Price + " " + item.Commonness);
+                            Console.WriteLine("{0,-3} {1,-30} {2,-10} {3,-10}",item.Id, item.Name, item.Price, item.Commonness);
                         }
                         break;
                     case 7:
