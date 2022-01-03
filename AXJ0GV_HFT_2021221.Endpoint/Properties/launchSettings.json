@@ -11,7 +11,7 @@
     "IIS Express": {
       "launchUrl": "Dog",
       "commandName": "IISExpress",
-      "launchBrowser": false,
+      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -19,7 +19,7 @@
     "AXJ0GV_HFT_2021221.Endpoint": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl": "Dog",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
