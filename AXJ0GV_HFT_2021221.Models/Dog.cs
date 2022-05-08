@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,7 +16,7 @@ namespace AXJ0GV_HFT_2021221.Models
         Female
     }
     [Table("dogs")]
-    public class Dog
+    public class Dog : ObservableObject
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

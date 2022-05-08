@@ -10,14 +10,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace MovieDbApp.RestClient
+namespace AXJ0GV_HFT_2021221.WpfClient
 {
     public class RestService
     {
         HttpClient client;
 
-        public RestService(string baseurl, string pingableEndpoint = "swagger")
+        public RestService(string baseurl, string pingableEndpoint = "dog")
         {
+            //System.Threading.Thread.Sleep(5000);
             bool isOk = false;
             do
             {

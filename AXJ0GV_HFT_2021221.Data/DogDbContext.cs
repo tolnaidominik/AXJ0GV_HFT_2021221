@@ -120,6 +120,15 @@ namespace AXJ0GV_HFT_2021221.Data
                 OwnerID = Doma.Id,
                 InjectionID = Hepatitis.Id
             };
+            Dog Malna = new Dog()
+            {
+                Id = 3,
+                Name = "Malna",
+                Sex = Sex.Female,
+                Species = "Pug",
+                OwnerID = Doma.Id,
+                InjectionID = Parainfluenza.Id
+            };
             Dog Mogyi = new Dog()
             {
                 Id = 2,
@@ -145,7 +154,7 @@ namespace AXJ0GV_HFT_2021221.Data
                     .OnDelete(DeleteBehavior.Cascade);
             });
             modelBuilder.Entity<Owner>().HasData(Kritya, Doma, Tubi);
-            modelBuilder.Entity<Dog>().HasData(Afi,Mogyi);
+            modelBuilder.Entity<Dog>().HasData(Afi,Mogyi, Malna);
             modelBuilder.Entity<Injection>().HasData(Bordetella, Distemper, Hepatitis, Parainfluenza, Heartworm, Leptospirosis, Parvovirus, Rabies);
         }
     }

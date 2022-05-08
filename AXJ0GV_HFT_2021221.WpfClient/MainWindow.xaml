@@ -5,8 +5,90 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AXJ0GV_HFT_2021221.WpfClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="800">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24*"/>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="24*"/>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <UniformGrid Grid.Column="0" Grid.Row="2" Columns="3">
+            <Button Command="{Binding AddPerson}" Background="Green">Add</Button>
+            <Button Command="{Binding RemovePerson}" Background="Red">Delete</Button>
+            <Button Command="{Binding ModifyPerson}" Background="Blue">Modify</Button>
+        </UniformGrid>
+        <UniformGrid Grid.Column="1" Grid.Row="2" Columns="3">
+            <Button Command="{Binding AddDoggo}" Background="Green">Add</Button>
+            <Button Command="{Binding RemoveDoggo}" Background="Red">Delete</Button>
+            <Button Command="{Binding ModifyDoggo}" Background="Blue">Modify</Button>
+        </UniformGrid>
+        <UniformGrid Grid.Column="0" Grid.Row="5" Columns="3">
+            <Button Command="{Binding AddInjection}" Background="Green">Add</Button>
+            <Button Command="{Binding RemoveInjection}" Background="Red">Delete</Button>
+            <Button Command="{Binding ModifyInjection}" Background="Blue">Modify</Button>
+        </UniformGrid>
+        <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding owners}" SelectedItem="{Binding SelectedOwner}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="2">
+                        <WrapPanel Orientation="Horizontal">
+                            <Label Content="{Binding Name}"></Label>
+                        </WrapPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="lb_dogs" Grid.Row="0" ItemsSource="{Binding SelectedDogsByOwner}" SelectedItem="{Binding SelectedDog}" Grid.Column="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="2">
+                    <WrapPanel Orientation="Horizontal">
+                        <Label Content="{Binding Name}"></Label>
+                    </WrapPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox ItemsSource="{Binding SelectedInjectionsByDog}" SelectedItem="{Binding SelectedInjection}" Grid.Column="0" Grid.Row="3">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}"></Label>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <Label Content="Owner name:"></Label>
+            <TextBox Text="{Binding SelectedOwner.Name}"></TextBox>
+            <Label Content="Owner identity card number:"></Label>
+            <TextBox Text="{Binding SelectedOwner.IdentityCardNumber}"></TextBox>
+            <Label Content="Owner sex:"></Label>
+            <ComboBox x:Name="cb_box" Loaded="ComboBox_Loaded" SelectedItem="{Binding SelectedOwner.Sex}"></ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Label Content="Dog name:"></Label>
+            <TextBox Text="{Binding SelectedDog.Name}"></TextBox>
+            <Label Content="Dog species:"></Label>
+            <TextBox Text="{Binding SelectedDog.Species}"></TextBox>
+            <Label Content="Dog sex:"></Label>
+            <ComboBox x:Name="cb_boxDoggo" Loaded="ComboBoxDoggoLoaded" SelectedItem="{Binding SelectedDog.Sex}"></ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="4" Loaded="StackPanel_Loaded">
+            <Label Content="Injection Name:"></Label>
+            <ComboBox x:Name="cb_boxInjectionName" SelectedItem="{Binding SelectedInjection.Name}"></ComboBox>
+            <Label Content="Injection price:"></Label>
+            <TextBox Text="{Binding SelectedInjection.Price}"></TextBox>
+            <Label Content="Injection Commonness:"></Label>
+            <ComboBox x:Name="cb_boxInjectionCommonness" SelectedItem="{Binding SelectedInjection.Commonness}"></ComboBox>
+        </StackPanel>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,7 +29,7 @@ namespace AXJ0GV_HFT_2021221.Models
         Yearly
     }
     [Table("injections")]
-    public class Injection
+    public class Injection : ObservableObject
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
