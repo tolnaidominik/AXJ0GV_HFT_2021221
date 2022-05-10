@@ -11,11 +11,11 @@
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="24*"/>
+            <RowDefinition Height="15*"/>
             <RowDefinition Height="18*"/>
             <RowDefinition Height="4*"/>
-            <RowDefinition Height="24*"/>
-            <RowDefinition Height="18*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="17*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -42,7 +42,10 @@
                 <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="2">
                         <WrapPanel Orientation="Horizontal">
+                            <Label Content="{Binding Id}"></Label>
                             <Label Content="{Binding Name}"></Label>
+                            <Label Content="{Binding IdentityCardNumber}"></Label>
+                            <Label Content="{Binding Sex}"></Label>
                         </WrapPanel>
                     </Border>
                 </DataTemplate>
@@ -53,16 +56,24 @@
                 <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="2">
                     <WrapPanel Orientation="Horizontal">
+                        <Label Content="{Binding Id}"></Label>
                         <Label Content="{Binding Name}"></Label>
+                        <Label Content="{Binding Species}"></Label>
+                        <Label Content="{Binding Sex}"></Label>
                     </WrapPanel>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox ItemsSource="{Binding SelectedInjectionsByDog}" SelectedItem="{Binding SelectedInjection}" Grid.Column="0" Grid.Row="3">
+        <ListBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding SelectedInjectionsByDog}" SelectedItem="{Binding SelectedInjection}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding Name}"></Label>
+                    <WrapPanel Orientation="Horizontal">
+                        <Label Content="{Binding Id}"></Label>
+                        <Label Content="{Binding Name}"></Label>
+                        <Label Content="{Binding Price}"></Label>
+                        <Label Content="{Binding Commonness}"></Label>
+                    </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -81,6 +92,8 @@
             <TextBox Text="{Binding SelectedDog.Species}"></TextBox>
             <Label Content="Dog sex:"></Label>
             <ComboBox x:Name="cb_boxDoggo" Loaded="ComboBoxDoggoLoaded" SelectedItem="{Binding SelectedDog.Sex}"></ComboBox>
+            <Label Content="Dog injection:"></Label>
+            <ComboBox x:Name="cb_boxDoggoInjection" Loaded="ComboBoxDoggoInjectionLoaded" SelectedItem="{Binding SelectedInjectionsByDog[0].Name}"></ComboBox>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="4" Loaded="StackPanel_Loaded">
             <Label Content="Injection Name:"></Label>

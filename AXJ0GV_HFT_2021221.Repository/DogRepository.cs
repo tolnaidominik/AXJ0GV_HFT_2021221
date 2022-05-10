@@ -47,6 +47,7 @@ namespace AXJ0GV_HFT_2021221.Repository
             old.OwnerID = dog.OwnerID;
             old.Sex = dog.Sex;
             old.Species = dog.Species;
+            old.InjectionID = dog.InjectionID;
 
             context.SaveChanges();
         }

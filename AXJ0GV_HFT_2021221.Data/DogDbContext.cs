@@ -55,6 +55,13 @@ namespace AXJ0GV_HFT_2021221.Data
                 IdentityCardNumber = "DSA321",
                 Sex = Sex.Female
             };
+            Injection noInjection = new Injection()
+            {
+                Id = 107,
+                Name = InjectionName.Null,
+                Commonness = Commonness.Null,
+                Price = 0
+            };
             Injection Bordetella = new Injection()
             {
                 Id = 1,
@@ -155,7 +162,7 @@ namespace AXJ0GV_HFT_2021221.Data
             });
             modelBuilder.Entity<Owner>().HasData(Kritya, Doma, Tubi);
             modelBuilder.Entity<Dog>().HasData(Afi,Mogyi, Malna);
-            modelBuilder.Entity<Injection>().HasData(Bordetella, Distemper, Hepatitis, Parainfluenza, Heartworm, Leptospirosis, Parvovirus, Rabies);
+            modelBuilder.Entity<Injection>().HasData(Bordetella, Distemper, Hepatitis, Parainfluenza, Heartworm, Leptospirosis, Parvovirus, Rabies, noInjection);
         }
     }
 }

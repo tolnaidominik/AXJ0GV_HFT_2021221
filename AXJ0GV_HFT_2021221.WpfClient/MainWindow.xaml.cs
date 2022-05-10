@@ -36,6 +36,11 @@ namespace AXJ0GV_HFT_2021221.WpfClient
 
             cb_boxDoggo.ItemsSource = Enum.GetValues(typeof(Sex)).Cast<Sex>();
         }
+        private void ComboBoxDoggoInjectionLoaded(object sender, RoutedEventArgs e)
+        {
+
+            cb_boxDoggoInjection.ItemsSource = Enum.GetValues(typeof(InjectionName)).Cast<InjectionName>();
+        }
         private void StackPanel_Loaded(object sender, RoutedEventArgs e)
         {
             cb_boxInjectionName.ItemsSource = Enum.GetValues(typeof(InjectionName)).Cast<InjectionName>();

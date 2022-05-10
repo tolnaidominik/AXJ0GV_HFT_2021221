@@ -19,14 +19,16 @@ namespace AXJ0GV_HFT_2021221.Models
         Heartworm,
         Leptospirosis,
         Parvovirus,
-        Rabies
+        Rabies,
+        Null
     }
     public enum Commonness
     {
         Once,
         Monthly,
         Half_year,
-        Yearly
+        Yearly,
+        Null
     }
     [Table("injections")]
     public class Injection : ObservableObject
