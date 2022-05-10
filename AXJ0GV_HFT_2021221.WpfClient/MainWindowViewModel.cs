@@ -51,6 +51,7 @@ namespace AXJ0GV_HFT_2021221.WpfClient
             set 
             {
                 selectedInjection = null;
+                (AddDoggo as RelayCommand).NotifyCanExecuteChanged();
                 (RemoveInjection as RelayCommand).NotifyCanExecuteChanged();
                 (ModifyInjection as RelayCommand).NotifyCanExecuteChanged();
                 //SetProperty(ref selectedDog, value);
@@ -128,6 +129,7 @@ namespace AXJ0GV_HFT_2021221.WpfClient
             }
         }
         private Injection selectedInjection;
+        private Injection InjectionBeforeDelete;
 
         public Injection SelectedInjection
         {
@@ -135,6 +137,7 @@ namespace AXJ0GV_HFT_2021221.WpfClient
             set 
             {
                 //SetProperty(ref selectedInjection, value);
+
                 if (value != null)
                 {
                     selectedInjection = new Injection()
@@ -150,8 +153,8 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                 }
             }
         }
-
         private ObservableCollection<Injection> selectedInjectionsByDog;
+        int index_szamlalo = 4;
 
         public ObservableCollection<Injection> SelectedInjectionsByDog
         {
@@ -183,7 +186,6 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                 injections = new RestCollection<Injection>("http://localhost:18683/", "Injection");
                 selectedDogsByOwner = new ObservableCollection<Dog>();
                 selectedInjectionsByDog = new ObservableCollection<Injection>();
-
                 AddPerson = new RelayCommand(() =>
                 {
                     owners.Add(new Owner
@@ -196,7 +198,7 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                 );
                 AddDoggo = new RelayCommand(() =>
                 {
-                Dog newDoggo;
+                    Dog newDoggo;
                     dogs.Add(newDoggo = new Dog
                     {
                         Name = "Lábhoz",
@@ -205,7 +207,8 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                         OwnerID = SelectedOwner.Id,
                         InjectionID = 1
                     });
-                    newDoggo.Id = dogs.Count() + 1;
+                    newDoggo.Id = index_szamlalo++;
+                    selectedDog = newDoggo;
                     selectedDogsByOwner.Add(newDoggo);
                 }, () => SelectedOwner != null
                 );
@@ -234,6 +237,8 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                 );
                 RemoveDoggo = new RelayCommand(() =>
                 {
+                    Owner needOwner = owners.FirstOrDefault(x => x.Id == SelectedDog.OwnerID);
+                    selectedOwner = needOwner;
                     dogs.Delete(SelectedDog.Id);
                     selectedDogsByOwner.Remove(SelectedDog);
                     selectedDog = null;
@@ -242,6 +247,7 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                 );
                 RemoveInjection = new RelayCommand(() =>
                 {
+                    InjectionBeforeDelete = SelectedInjection;
                     selectedInjectionsByDog.Clear();
                     SelectedDog.InjectionID = 107;
                     dogs.Update(SelectedDog);
@@ -264,6 +270,12 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                 ModifyInjection = new RelayCommand(() =>
                 {
                     int torolnivaloID = SelectedInjection.Id;
+                    Injection getInjection = SelectedInjection;
+                    foreach (Injection item in injections)
+                    {
+                        getInjection = injections.FirstOrDefault(x => x.Name == SelectedInjection.Name);
+                    }
+                    SelectedInjection = getInjection;
                     selectedInjectionsByDog.Remove(selectedInjectionsByDog.FirstOrDefault(x => x.Id == torolnivaloID));
                     injections.Update(SelectedInjection);
                     selectedInjectionsByDog.Add(SelectedInjection);

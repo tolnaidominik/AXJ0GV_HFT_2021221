@@ -43,6 +43,7 @@ namespace AXJ0GV_HFT_2021221.Repository
         {
             Injection old = ReadOne(injection.Id);
 
+            old.Id = injection.Id;
             old.Name = injection.Name;
             old.Price = injection.Price;
             old.Commonness = injection.Commonness;

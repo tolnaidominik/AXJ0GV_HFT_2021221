@@ -12,6 +12,7 @@ namespace AXJ0GV_HFT_2021221.Models
 { 
     public enum InjectionName
     {
+        Null,
         Bordetella_Bronchiseptica,
         Canine_Distemper,
         Canine_Hepatitis,
@@ -19,8 +20,7 @@ namespace AXJ0GV_HFT_2021221.Models
         Heartworm,
         Leptospirosis,
         Parvovirus,
-        Rabies,
-        Null
+        Rabies
     }
     public enum Commonness
     {

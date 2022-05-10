@@ -92,16 +92,14 @@
             <TextBox Text="{Binding SelectedDog.Species}"></TextBox>
             <Label Content="Dog sex:"></Label>
             <ComboBox x:Name="cb_boxDoggo" Loaded="ComboBoxDoggoLoaded" SelectedItem="{Binding SelectedDog.Sex}"></ComboBox>
-            <Label Content="Dog injection:"></Label>
-            <ComboBox x:Name="cb_boxDoggoInjection" Loaded="ComboBoxDoggoInjectionLoaded" SelectedItem="{Binding SelectedInjectionsByDog[0].Name}"></ComboBox>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="4" Loaded="StackPanel_Loaded">
             <Label Content="Injection Name:"></Label>
             <ComboBox x:Name="cb_boxInjectionName" SelectedItem="{Binding SelectedInjection.Name}"></ComboBox>
             <Label Content="Injection price:"></Label>
-            <TextBox Text="{Binding SelectedInjection.Price}"></TextBox>
+            <TextBox Text="{Binding SelectedInjection.Price}" IsEnabled="False"></TextBox>
             <Label Content="Injection Commonness:"></Label>
-            <ComboBox x:Name="cb_boxInjectionCommonness" SelectedItem="{Binding SelectedInjection.Commonness}"></ComboBox>
+            <ComboBox x:Name="cb_boxInjectionCommonness" SelectedItem="{Binding SelectedInjection.Commonness}" IsEnabled="false"></ComboBox>
         </StackPanel>
     </Grid>
 </Window>
