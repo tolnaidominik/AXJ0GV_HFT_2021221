@@ -192,10 +192,10 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                 injections = new RestCollection<Injection>("http://localhost:18683/", "Injection");
                 selectedDogsByOwner = new ObservableCollection<Dog>();
                 selectedInjectionsByDog = new ObservableCollection<Injection>();
+                
                 statGetUsedInjection = new RestCollection<Injection>("http://localhost:18683/", "stat/GetUsedInjections");
                 statOrderByPriceInjection = new RestCollection<Injection>("http://localhost:18683/", "stat/OrderByPrice");
                 statOrderByIdentityCardNumberOwner = new RestCollection<Owner>("http://localhost:18683/", "stat/OrderByIdentityCardNumber");
-                
 
                 
                 AddPerson = new RelayCommand(() =>
@@ -206,6 +206,7 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                         IdentityCardNumber = "LOL420"
 
                     });
+                    statOrderByIdentityCardNumberOwner = new RestCollection<Owner>("http://localhost:18683/", "stat/OrderByIdentityCardNumber");
                 }
                 );
                 AddDoggo = new RelayCommand(() =>
@@ -289,6 +290,8 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                     }
                     SelectedInjection = getInjection;
                     selectedInjectionsByDog.Remove(selectedInjectionsByDog.FirstOrDefault(x => x.Id == torolnivaloID));
+                    SelectedDog.InjectionID = SelectedInjection.Id;
+                    dogs.Update(SelectedDog);
                     injections.Update(SelectedInjection);
                     selectedInjectionsByDog.Add(SelectedInjection);
                 }, () => SelectedInjection!= null);
