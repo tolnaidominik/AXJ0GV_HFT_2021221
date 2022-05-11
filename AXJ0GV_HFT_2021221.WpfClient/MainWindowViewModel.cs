@@ -24,6 +24,7 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                 return (bool)DependencyPropertyDescriptor.FromProperty(prop, typeof(FrameworkElement)).Metadata.DefaultValue;
             }
         }
+
         public ICommand AddPerson{ get; set; }
         public ICommand AddDoggo{ get; set; }
         public ICommand AddInjection{ get; set; }
@@ -39,6 +40,10 @@ namespace AXJ0GV_HFT_2021221.WpfClient
         public List<Injection> injectionHelp { get; set; }
         public RestCollection<Owner> owners { get; set; }
         public RestCollection<Injection> injections { get; set; }
+        public RestCollection<Injection> statGetUsedInjection { get; set; }
+        public RestCollection<Injection> statOrderByPriceInjection { get; set; }
+        public RestCollection<Owner> statOrderByIdentityCardNumberOwner { get; set; }
+
 
         private Dog selectedDog;
 
@@ -156,6 +161,7 @@ namespace AXJ0GV_HFT_2021221.WpfClient
         private ObservableCollection<Injection> selectedInjectionsByDog;
         int index_szamlalo = 4;
 
+
         public ObservableCollection<Injection> SelectedInjectionsByDog
         {
             get { return selectedInjectionsByDog; }
@@ -186,6 +192,12 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                 injections = new RestCollection<Injection>("http://localhost:18683/", "Injection");
                 selectedDogsByOwner = new ObservableCollection<Dog>();
                 selectedInjectionsByDog = new ObservableCollection<Injection>();
+                statGetUsedInjection = new RestCollection<Injection>("http://localhost:18683/", "stat/GetUsedInjections");
+                statOrderByPriceInjection = new RestCollection<Injection>("http://localhost:18683/", "stat/OrderByPrice");
+                statOrderByIdentityCardNumberOwner = new RestCollection<Owner>("http://localhost:18683/", "stat/OrderByIdentityCardNumber");
+                
+
+                
                 AddPerson = new RelayCommand(() =>
                 {
                     owners.Add(new Owner

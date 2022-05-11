@@ -15,7 +15,7 @@
             <RowDefinition Height="18*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="15*"/>
-            <RowDefinition Height="17*"/>
+            <RowDefinition Height="13*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -55,12 +55,12 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="2">
-                    <WrapPanel Orientation="Horizontal">
-                        <Label Content="{Binding Id}"></Label>
-                        <Label Content="{Binding Name}"></Label>
-                        <Label Content="{Binding Species}"></Label>
-                        <Label Content="{Binding Sex}"></Label>
-                    </WrapPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <Label Content="{Binding Id}"></Label>
+                            <Label Content="{Binding Name}"></Label>
+                            <Label Content="{Binding Species}"></Label>
+                            <Label Content="{Binding Sex}"></Label>
+                        </WrapPanel>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -101,5 +101,45 @@
             <Label Content="Injection Commonness:"></Label>
             <ComboBox x:Name="cb_boxInjectionCommonness" SelectedItem="{Binding SelectedInjection.Commonness}" IsEnabled="false"></ComboBox>
         </StackPanel>
+        <UniformGrid Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" Rows="3">
+            <ListBox ItemsSource="{Binding statGetUsedInjection}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel Orientation="Horizontal">
+                            <Label>NON-CRUD - Get used Injection</Label>
+                            <Label Content="{Binding Id}"></Label>
+                            <Label Content="{Binding Name}"></Label>
+                            <Label Content="{Binding Price}"></Label>
+                            <Label Content="{Binding Commonness}"></Label>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ListBox ItemsSource="{Binding statOrderByIdentityCardNumberOwner}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel Orientation="Horizontal">
+                            <Label>NON-CRUD - (Owner order by identity card number)</Label>
+                            <Label Content="{Binding Id}"></Label>
+                            <Label Content="{Binding Name}"></Label>
+                            <Label Content="{Binding IdentityCardNumber}"></Label>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ListBox ItemsSource="{Binding statOrderByPriceInjection}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel Orientation="Horizontal">
+                            <Label>NON-CRUD - Injection order by price</Label>
+                            <Label Content="{Binding Id}"></Label>
+                            <Label Content="{Binding Name}"></Label>
+                            <Label Content="{Binding Price}"></Label>
+                            <Label Content="{Binding Commonness}"></Label>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </UniformGrid>
     </Grid>
 </Window>
