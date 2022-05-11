@@ -25,6 +25,7 @@ namespace AXJ0GV_HFT_2021221.WpfClient
             }
         }
 
+
         public ICommand AddPerson{ get; set; }
         public ICommand AddDoggo{ get; set; }
         public ICommand AddInjection{ get; set; }
@@ -187,9 +188,9 @@ namespace AXJ0GV_HFT_2021221.WpfClient
         {
             if (!IsInDesignMode)
             {
-                dogs = new RestCollection<Dog>("http://localhost:18683/", "Dog");
+                dogs = new RestCollection<Dog>("http://localhost:18683/", "Dog", "hub");
                 owners = new RestCollection<Owner>("http://localhost:18683/", "Owner");
-                injections = new RestCollection<Injection>("http://localhost:18683/", "Injection");
+                injections = new RestCollection<Injection>("http://localhost:18683/", "Injection", "hub");
                 selectedDogsByOwner = new ObservableCollection<Dog>();
                 selectedInjectionsByDog = new ObservableCollection<Injection>();
                 

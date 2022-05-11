@@ -61,5 +61,10 @@ namespace AXJ0GV_HFT_2021221.Logic
                 .ReadAll()
                 .Sum(x => x.Price ?? 0);
         }
+
+        public Injection Read(int id)
+        {
+            return repo.ReadOne(id);
+        }
     }
 }

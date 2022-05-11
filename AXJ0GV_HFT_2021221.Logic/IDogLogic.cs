@@ -11,6 +11,7 @@ namespace AXJ0GV_HFT_2021221.Logic
     {
         void Create(Dog dog);
         IQueryable<Dog> ReadAll();
+        Dog Read(int id);
         void Update(Dog dog);
         void Delete(int dogId);
         int CountByOwner(int ownerID);

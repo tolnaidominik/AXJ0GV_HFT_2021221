@@ -70,5 +70,10 @@ namespace AXJ0GV_HFT_2021221.Logic
                 .Select(x => x.Injection)
                 .ToList();
         }
+
+        public Dog Read(int id)
+        {
+            return repo.ReadOne(id);
+        }
     }
 }

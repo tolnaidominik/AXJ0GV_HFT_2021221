@@ -39,6 +39,7 @@ namespace AXJ0GV_HFT_2021221.Endpoint
 
 
             services.AddTransient<DogDbContext, DogDbContext>();
+            services.AddSignalR();
             
         }
 
@@ -58,7 +59,8 @@ namespace AXJ0GV_HFT_2021221.Endpoint
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+            endpoints.MapControllers();
+            endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }

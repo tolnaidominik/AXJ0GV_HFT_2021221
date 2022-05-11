@@ -11,6 +11,7 @@ namespace AXJ0GV_HFT_2021221.Logic
     {
         void Create(Owner owner);
         IQueryable<Owner> ReadAll();
+        Owner Read(int id);
         void Update(Owner owner);
         void Delete(int ownerId);
         List<Owner> OrderByIdentityCardNumber();

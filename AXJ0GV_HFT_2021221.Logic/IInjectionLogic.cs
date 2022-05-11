@@ -11,6 +11,7 @@ namespace AXJ0GV_HFT_2021221.Logic
     {
         void Create(Injection injection);
         IQueryable<Injection> ReadAll();
+        Injection Read(int id);
         void Update(Injection injection);
         void Delete(int injectionId);
         List<Injection> OrderByPrice();

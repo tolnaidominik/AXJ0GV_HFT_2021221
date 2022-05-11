@@ -65,5 +65,10 @@ namespace AXJ0GV_HFT_2021221.Logic
                .Select(x => new KeyValuePair<string, int>(
                    x.Key.Name, x.Key.Name.Count()));
         }
+
+        public Owner Read(int id)
+        {
+            return repo.ReadOne(id);
+        }
     }
 }
