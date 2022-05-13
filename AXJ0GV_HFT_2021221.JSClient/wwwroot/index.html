@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Owners</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js%22%3E</script>-->
+</head>
+<body>
+    <section class="welcome_section">
+        <div>
+            <h1>Owners</h1>
+        </div>
+    </section>
+    <section>
+        <div id="create_owner_div">
+            <p>Owner name</p>
+            <input type="text" id="create_owner_name"/>
+            <p>Owner identity card number</p>
+            <input type="text" id="create_owner_icn"/>
+            <p>Owner sex</p>
+            <select name="cars" id="create_owner_sex">
+                <option value="0" selected>Male</option>
+                <option value="1">Female</option>
+            </select>
+            <br />
+            <button type="submit" style="margin-top: 2%;">Add</button>
+        </div>
+    </section>
+    <section>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Identity Card Number</th>
+                        <th>Sex</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="table_body_content">
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </section>
+</body>
+</html>

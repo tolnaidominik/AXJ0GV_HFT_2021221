@@ -54,7 +54,11 @@ namespace AXJ0GV_HFT_2021221.Endpoint
             {
                 app.UseExceptionHandler("/Error");
             }
-
+            app.UseCors(x => x
+            .AllowCredentials()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .WithOrigins("http://localhost:31666"));
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
