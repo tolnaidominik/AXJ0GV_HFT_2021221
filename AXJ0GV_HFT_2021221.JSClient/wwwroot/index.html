@@ -8,24 +8,38 @@
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js%22%3E</script>-->
 </head>
 <body>
-    <section class="welcome_section">
+    <section>
         <div>
-            <h1>Owners</h1>
+            <h1>OWNERS - CRUD</h1>
         </div>
     </section>
     <section>
-        <div id="create_owner_div">
+        <div id="create_owner_section" style="float: left">
             <p>Owner name</p>
-            <input type="text" id="create_owner_name"/>
+            <input type="text" id="create_owner_name" />
             <p>Owner identity card number</p>
-            <input type="text" id="create_owner_icn"/>
+            <input type="text" id="create_owner_icn" />
             <p>Owner sex</p>
-            <select name="cars" id="create_owner_sex">
+            <select id="create_owner_sex">
                 <option value="0" selected>Male</option>
                 <option value="1">Female</option>
             </select>
             <br />
-            <button type="submit" style="margin-top: 2%;">Add</button>
+            <button type="submit" style="margin-top: 10%;" onclick="create()">Add</button>
+        </div>
+        <div id="update_owner_section" style="display:none; float: left;">
+            <p>Owner name</p>
+            <input type="text" id="update_owner_name" />
+            <p>Owner identity card number</p>
+            <input type="text" id="update_owner_icn" />
+            <p>Owner sex</p>
+            <select id="update_owner_sex">
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+            </select>
+            <br />
+            <button type="submit" style="margin-top: 10%;" onclick="update()">Update</button>
+            <button style="margin-top: 10%;" onclick="showSelection()">Close</button>
         </div>
     </section>
     <section>
@@ -41,6 +55,40 @@
                     </tr>
                 </thead>
                 <tbody id="table_body_content">
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </section>
+    <section style="background-color: #543152">
+        <h1>NON-CRUD</h1>
+        <div>
+            <h3 id="non_crud_sum_price"></h3>
+            <h3>OWNER ORDER BY IDENTITY CARD NUMBER</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Identity Card Number</th>
+                        <th>Sex</th>
+                    </tr>
+                </thead>
+                <tbody id="non_crud_owners">
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+            <h3>INJECTION ORDER BY PRICE (ASC)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Commonness</th>
+                    </tr>
+                </thead>
+                <tbody id="non_crud_injection">
                 </tbody>
                 <tfoot></tfoot>
             </table>

@@ -1,10 +1,12 @@
 ﻿let owners = [];
+let ownerOrderByICN = [];
+let injectionOrderByPrice = [];
+let injectionSumPrice;
 let connection;
 let ownerUpdate;
 
 getdata();
 setupSignalR();
-
 
 function setupSignalR() {
     connection = new signalR.HubConnectionBuilder()
@@ -47,6 +49,24 @@ async function getdata() {
             owners = Object.values(list);
             display();
         })
+    await fetch('http://localhost:18683/stat/OrderByPrice')
+        .then(x => x.json())
+        .then(result => {
+            injectionOrderByPrice = Object.values(result);
+            displayNonCrudOrderByPrice();
+        })
+    await fetch('http://localhost:18683/stat/OrderByIdentityCardNumber')
+        .then(x => x.json())
+        .then(result => {
+            ownerOrderByICN = Object.values(result);
+            displayStat();
+        })
+    await fetch('http://localhost:18683/stat/SumPrice')
+        .then(x => x.json())
+        .then(result => {
+            injectionSumPrice = result;
+            displayStat();
+        })
 }
 
 async function start() {
@@ -74,15 +94,73 @@ function display() {
             document.getElementById('table_body_content').innerHTML +=
                 "<tr><td>" + owner.id + "</td><td>" + owner.name + "</td ><td>" + owner.identityCardNumber + "</td><td>"
                 + sex + "</td><td>" +
-                `<button type="button" class="deletebtn" onclick="remove(${owner.id})">Delete</button>` +
-                `<button type="button" class="editbtn" onclick="edit(${owner.id})">Modify</button>`
+                `<button type="button" id="btn_delete" class="deletebtn" onclick="remove(${owner.id})">Delete</button>` +
+                `<button type="button" id="btn_modify" class="editbtn" onclick="edit(${owner.id});showSelection()">Modify</button>`
                 + "</td ></tr >"
         }
     )
 }
+function displayNonCrudOrderByPrice() {
+    let name;
+    let commonness;
+    document.getElementById("non_crud_injection").innerHTML = null;
+    injectionOrderByPrice[1].forEach(
+        (injection) => {
+            switch (injection.name) {
+                case 1: name = "Bordetella_Bronchiseptica"; break;
+                case 2: name = "Canine_Distemper"; break;
+                case 3: name = "Canine_Hepatitis"; break;
+                case 4: name = "Canine_Parainfluenza"; break;
+                case 5: name = "Heartworm"; break;
+                case 6: name = "Leptospirosis"; break;
+                case 7: name = "Parvovirus"; break;
+                case 7: name = "Rabies"; break;
+                default: case 0: name = "Null"; break;
+            }
+            switch (injection.commonness) {
+                case 1: commonness = "Monthly"; break;
+                case 2: commonness = "Half_year"; break;
+                case 3: commonness = "Yearly"; break;
+                case 4: commonness = "Null"; break;
+                default: case 0: commonness = "Once"; break;
+            }
+            document.getElementById('non_crud_injection').innerHTML +=
+                "<tr><td>" + injection.id + "</td><td>" + name + "</td ><td>" + injection.price + "</td><td>" + commonness + "</td>"
+        }
+    )
 
+}
+function displayStat() {
+    document.getElementById("non_crud_sum_price").innerHTML = null;
+    document.getElementById("non_crud_owners").innerHTML = null;
+
+    document.getElementById("non_crud_sum_price").innerHTML = "Sum price of injections: " + injectionSumPrice;
+    ownerOrderByICN[1].forEach(
+        (owner) => {
+            if (owner.sex == 0) {
+                sex = "Male";
+            }
+            else {
+                sex = "Female";
+            }
+            document.getElementById('non_crud_owners').innerHTML +=
+                "<tr><td>" + owner.id + "</td><td>" + owner.name + "</td ><td>" + owner.identityCardNumber + "</td><td>" + sex + "</td>"
+        }
+    )
+}
+function showSelection() {
+        var x = document.getElementById("update_owner_section");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+}
 function create() {
-    let name = document.getElementById('cinemaname').value
+    let name = document.getElementById('create_owner_name').value
+    let icn = document.getElementById('create_owner_icn').value
+    let sex = document.getElementById('create_owner_sex').value
+    console.log(name, icn, sex)
     fetch('http://localhost:18683/owner', {
         method: 'POST',
         headers: {
@@ -90,8 +168,9 @@ function create() {
         },
         body: JSON.stringify(
             {
-                Name: name,
-                Rooms: null
+                name: name,
+                identityCardNumber: icn,
+                Sex: parseInt(sex)
             }),
     })
         .then(response => response)
@@ -128,14 +207,17 @@ function remove(id) {
 }
 
 function edit(id) {
-    document.getElementById('cinemanametoupdate').value = cinemas.find(cinema => cinema['id'] == id)['name']
-    document.getElementById('updatecinemaformdiv').style.visibility = "visible"
-    cinemaUpdate = id
+    ownerUpdate = id
+    console.log(ownerUpdate);
+    document.getElementById("update_owner_name").value = owners[1].find(owner => owner['id'] == id)['name'];
+    document.getElementById("update_owner_icn").value = owners[1].find(owner => owner['id'] == id)['identityCardNumber'];
+    document.getElementById("update_owner_sex").value = owners[1].find(owner => owner['id'] == id)['sex'];
 }
 
 function update() {
-    document.getElementById('updatecinemaformdiv').style.visibility = "collapse"
-    let name = document.getElementById('cinemanametoupdate').value
+    let name = document.getElementById('update_owner_name').value
+    let icn = document.getElementById('update_owner_icn').value
+    let sex = document.getElementById('update_owner_sex').value
 
     fetch('http://localhost:18683/owner', {
         method: 'PUT',
@@ -144,8 +226,10 @@ function update() {
         },
         body: JSON.stringify(
             {
-                Id: cinemaUpdate,
+                Id: ownerUpdate,
                 Name: name,
+                identityCardNumber: icn,
+                Sex: parseInt(sex)
             }),
     })
         .then(response => response)

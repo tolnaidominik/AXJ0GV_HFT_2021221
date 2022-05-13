@@ -17,12 +17,19 @@ html {
     font-style: normal;
     color: #ab9fbb;
 }
-h1 {
+h1, h3 {
     text-align: center;
 }
-#create_owner_div {
+#create_owner_section {
     margin: 2%;
-    padding: 30px;
+    padding: 20px;
     width: max-content;
     background-color: #1c0452;
+    display: inline-block;
+}
+#update_owner_section {
+    margin: 2%;
+    padding: 20px;
+    width: max-content;
+    background-color: #8e57b5;
 }
