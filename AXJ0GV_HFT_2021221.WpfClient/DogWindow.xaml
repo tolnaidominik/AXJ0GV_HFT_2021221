@@ -5,8 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AXJ0GV_HFT_2021221.WpfClient"
         mc:Ignorable="d"
-        Title="DogWindow" Height="450" Width="800">
+        Title="DogWindow" Height="500" Width="500">
+    <Window.DataContext>
+        <local:DogWindowViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Row="0" Grid.RowSpan="2" ItemsSource="{Binding dogs}" SelectedItem="{Binding SelectedDoggo}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Id}"></Label>
+                            <Label Content="{Binding Name}"></Label>
+                            <Label Content="{Binding Species}"></Label>
+                            <Label Content="{Binding Sex}"></Label>
+                            <Label Content="{Binding OwnerID}"></Label>
+                            <Label Content="{Binding InjectionID}"></Label>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label>Dog name</Label>
+            <TextBox Text="{Binding SelectedDoggo.Name}"></TextBox>
+            <Label>Dog species</Label>
+            <TextBox Text="{Binding SelectedDoggo.Species}"></TextBox>
+            <Label>Dog sex</Label>
+            <ComboBox SelectedIndex="0" Text="{Binding SelectedDoggo.Sex}">
+                <ComboBoxItem>Male</ComboBoxItem>
+                <ComboBoxItem>Female</ComboBoxItem>
+            </ComboBox>
+            <Label>Dog owner</Label>
+            <ComboBox ItemsSource="{Binding owners}" SelectedIndex="0" SelectedItem="{Binding SelectedOwner}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <ComboBoxItem Content="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Label>Dog injection</Label>
+            <ComboBox ItemsSource="{Binding injections}" SelectedIndex="0" SelectedItem="{Binding SelectedInjection}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <ComboBoxItem Content="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <UniformGrid>
+                <Button Command="{Binding AddDoggo}" Background="Green">Add</Button>
+                <Button Command="{Binding ClearDoggo}" Background="MistyRose">Clear</Button>
+            </UniformGrid>
+        </StackPanel>
+        <UniformGrid Columns="2" Grid.Row="2">
+            <Button FontSize="20" Background="Red" Command="{Binding RemoveDoggo}">Delete</Button>
+            <Button FontSize="20" Background="BlueViolet" Command="{Binding ModifyDoggo}">Modify</Button>
+        </UniformGrid>
     </Grid>
 </Window>
