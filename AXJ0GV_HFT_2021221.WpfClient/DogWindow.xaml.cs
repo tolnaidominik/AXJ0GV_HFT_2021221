@@ -1,5 +1,4 @@
-﻿using AXJ0GV_HFT_2021221.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AXJ0GV_HFT_2021221.WpfClient
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DogWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DogWindow : Window
     {
-        public MainWindow()
+        public DogWindow()
         {
             InitializeComponent();
         }

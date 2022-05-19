@@ -24,7 +24,10 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                 return (bool)DependencyPropertyDescriptor.FromProperty(prop, typeof(FrameworkElement)).Metadata.DefaultValue;
             }
         }
-
+        public ICommand OpenOwnersWindow { get; set; }
+        public ICommand OpenDogsWindow { get; set; }
+        public ICommand OpenInjectionsWindow { get; set; }
+        public ICommand OpenNonCrudWindow { get; set; }
 
         public ICommand AddPerson{ get; set; }
         public ICommand AddDoggo{ get; set; }
@@ -188,6 +191,14 @@ namespace AXJ0GV_HFT_2021221.WpfClient
         {
             if (!IsInDesignMode)
             {
+                OpenOwnersWindow = new RelayCommand(() => new OwnerWindow().ShowDialog());
+                OpenDogsWindow = new RelayCommand(() => new DogWindow().ShowDialog());
+                OpenInjectionsWindow = new RelayCommand(() => new InjectionWindow().ShowDialog());
+                OpenNonCrudWindow = new RelayCommand(() => new NonCrudWindow().ShowDialog());
+                
+                
+                
+                
                 dogs = new RestCollection<Dog>("http://localhost:18683/", "Dog", "hub");
                 owners = new RestCollection<Owner>("http://localhost:18683/", "Owner");
                 injections = new RestCollection<Injection>("http://localhost:18683/", "Injection", "hub");
