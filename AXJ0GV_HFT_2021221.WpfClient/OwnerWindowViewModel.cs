@@ -57,7 +57,8 @@ namespace AXJ0GV_HFT_2021221.WpfClient
         {
             if (!IsInDesignMode)
             {
-                owners = new RestCollection<Owner>("http://localhost:18683/", "Owner", "hub");
+                owners = new RestCollection<Owner>("http://localhost:18683/", "owner", "hub");
+
                 AddOwner = new RelayCommand(() =>
                 {
                     owners.Add(new Owner()
@@ -67,17 +68,22 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                         Sex = SelectedOwner.Sex
                     });
                 });
+
                 ClearOwner = new RelayCommand(() => SelectedOwner = new Owner());
+
                 RemoveOwner = new RelayCommand(() =>
                 {
                     owners.Delete(SelectedOwner.Id);
                     SelectedOwner = new Owner();
+
                 },() => SelectedOwner != null && SelectedOwner.Name != null
                 );
                 ModifyOwner = new RelayCommand(() =>
                 {
                     owners.Update(SelectedOwner);
+
                 }, () => SelectedOwner != null && SelectedOwner.Name != null);
+
                 SelectedOwner = new Owner();
             }
         }

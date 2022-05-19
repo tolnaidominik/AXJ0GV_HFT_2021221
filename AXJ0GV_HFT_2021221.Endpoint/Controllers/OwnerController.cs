@@ -48,7 +48,7 @@ namespace AXJ0GV_HFT_2021221.Endpoint.Controllers
         {
             var ownerToDelete = this.logic.Read(ownerId);
             logic.Delete(ownerId);
-            this.hub.Clients.All.SendAsync("InjectionDeleted", ownerToDelete);
+            this.hub.Clients.All.SendAsync("OwnerDeleted", ownerToDelete);
         }
     }
 }
