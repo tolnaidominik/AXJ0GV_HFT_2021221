@@ -98,7 +98,6 @@ namespace AXJ0GV_HFT_2021221.WpfClient
                         OwnerID = SelectedOwner.Id,
                         InjectionID = SelectedInjection.Id
                     });
-                    selectedDoggo = null;
                 });
                 ClearDoggo = new RelayCommand(() =>
                 {

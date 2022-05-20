@@ -6,7 +6,62 @@
         xmlns:local="clr-namespace:AXJ0GV_HFT_2021221.WpfClient"
         mc:Ignorable="d"
         Title="InjectionWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:InjectionWindowViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Row="0" Grid.RowSpan="2" ItemsSource="{Binding Injections}" SelectedItem="{Binding SelectedInjection}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Id}"></Label>
+                            <Label Content="{Binding Name}"></Label>
+                            <Label Content="{Binding Price}"></Label>
+                            <Label Content="{Binding Commonness}"></Label>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label>Injection name:</Label>
+            <ComboBox SelectedIndex="0" Text="{Binding SelectedInjection.Name}">
+                <ComboBoxItem>Bordetella_Bronchiseptica</ComboBoxItem>
+                <ComboBoxItem>Canine_Distemper</ComboBoxItem>
+                <ComboBoxItem>Canine_Hepatitis</ComboBoxItem>
+                <ComboBoxItem>Canine_Parainfluenza</ComboBoxItem>
+                <ComboBoxItem>Heartworm</ComboBoxItem>
+                <ComboBoxItem>Leptospirosis</ComboBoxItem>
+                <ComboBoxItem>Parvovirus</ComboBoxItem>
+                <ComboBoxItem>Rabies</ComboBoxItem>
+            </ComboBox>
+            <Label>Injection price:</Label>
+            <Slider x:Name="slider_price" Value="{Binding SelectedInjection.Price}" LargeChange="100" Minimum="1000" Maximum="100000" IsSnapToTickEnabled="True"></Slider>
+            <Label Content="{Binding ElementName=slider_price, Path=Value}"></Label>
+            <Label>Injection commonness</Label>
+            <ComboBox SelectedIndex="0" Text="{Binding SelectedInjection.Commonness}">
+                <ComboBoxItem>Once</ComboBoxItem>
+                <ComboBoxItem>Monthly</ComboBoxItem>
+                <ComboBoxItem>Half_year</ComboBoxItem>
+                <ComboBoxItem>Yearly</ComboBoxItem>
+            </ComboBox>
+            <UniformGrid>
+                <Button Command="{Binding AddInjection}" Background="Green">Add</Button>
+                <Button Command="{Binding ClearInjection}" Background="MistyRose">Clear</Button>
+            </UniformGrid>
+        </StackPanel>
+        <UniformGrid Columns="2" Grid.Row="2">
+            <Button FontSize="20" Background="Red" Command="{Binding RemoveInjection}">Delete</Button>
+            <Button FontSize="20" Background="BlueViolet" Command="{Binding ModifyInjection}">Modify</Button>
+        </UniformGrid>
     </Grid>
 </Window>

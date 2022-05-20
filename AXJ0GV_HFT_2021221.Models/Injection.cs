@@ -24,11 +24,11 @@ namespace AXJ0GV_HFT_2021221.Models
     }
     public enum Commonness
     {
+        Null,
         Once,
         Monthly,
         Half_year,
-        Yearly,
-        Null
+        Yearly
     }
     [Table("injections")]
     public class Injection : ObservableObject
